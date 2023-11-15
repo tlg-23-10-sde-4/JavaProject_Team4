@@ -100,6 +100,11 @@ public class Card {
 
     @Override
     public String toString(){
+        return String.format("\n#: %s - %s   %s/%s",getIndex(),getName(),getStrength(),getToughness());
+    }
+
+/*    @Override
+    public String toString(){
         return String.format(
                 "---------------------\n" +
                 "| #: %s       %s |\n" +
@@ -111,5 +116,5 @@ public class Card {
                 "| S: %s    |    T: %s |\n" +
                 "---------------------"
         ,getIndex(),getName(),getStrength(),getToughness());
-    }
+    }*/
 }
