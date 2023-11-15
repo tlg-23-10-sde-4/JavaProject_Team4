@@ -24,10 +24,10 @@ public class Card {
 
 
     //  constructors for Card
-    public Card(){
+    public Card() {
     }
 
-    public Card(Integer index, String name, Integer strength, Integer toughness){
+    public Card(Integer index, String name, Integer strength, Integer toughness) {
         setIndex(index);
         setName(name);
         setStrength(strength);
@@ -61,7 +61,7 @@ public class Card {
 
 
     //  business method to show full deck to end user
-    public void show(){
+    public void show() {
         System.out.println(deck);
     }
 
@@ -98,23 +98,28 @@ public class Card {
         this.toughness = toughness;
     }
 
-    @Override
-    public String toString(){
-        return String.format("\n#: %s - %s   %s/%s",getIndex(),getName(),getStrength(),getToughness());
-    }
+//    @Override
+//    public String toString(){
+//        return String.format("\n#: %s - %s   %s/%s",getIndex(),getName(),getStrength(),getToughness());
+//    }
 
-/*    @Override
-    public String toString(){
+
+    //    @Override
+//    public String toString() {
+//        return String.format("| #: %s %s S: %s T: %s |", getIndex(), getName(), getStrength(), getToughness());
+//    }
+    @Override
+    public String toString() {
         return String.format(
-                "---------------------\n" +
-                "| #: %s       %s |\n" +
-                "|                   |\n" +
-                "|                   |\n" +
-                "|                   |\n" +
-                "|                   |\n" +
-                "|                   |\n" +
-                "| S: %s    |    T: %s |\n" +
-                "---------------------"
-        ,getIndex(),getName(),getStrength(),getToughness());
-    }*/
+                         "---------------------" +
+                        "| #: %s     %s   |" +
+                        "|                   |" +
+                        "|                   |" +
+                        "|                   |" +
+                        "|                   |" +
+                        "|                   |" +
+                        "| S: %s    |    T: %s |" +
+                        "---------------------\n",
+                getIndex(), getName(), getStrength(), getToughness());
+    }
 }
