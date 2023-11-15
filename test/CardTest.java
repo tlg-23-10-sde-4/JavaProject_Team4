@@ -12,9 +12,5 @@ public class CardTest extends Card {
     public void showCard(){
         System.out.println(card);
     }
-    @Test
-    public void showGobo(){
-        System.out.println(gobo());
-    }
 
 }
