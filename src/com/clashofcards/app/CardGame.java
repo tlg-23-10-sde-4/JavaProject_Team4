@@ -1,25 +1,28 @@
 package com.clashofcards.app;
 
+import com.apps.util.Prompter;
 import com.clashofcards.Ai;
 import com.clashofcards.Card;
 import com.clashofcards.Player;
+import com.clashofcards.renderer.AttackPhase;
+import com.clashofcards.renderer.DefensePhase;
 import com.clashofcards.renderer.Welcome;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import com.apps.util.Console;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.SortedMap;
+import java.util.concurrent.TimeUnit;
 
 public class CardGame {
-    private final Scanner scanner = new Scanner(System.in);
     private Player player = new Player();
     private Player enemy = new Ai();
-    Card card = new Card();
     private List<Card> playerBattleField = new ArrayList<>();
     private List<Card> enemyBattleField = new ArrayList<>();
+    Card card = new Card();
+    AttackPhase attackPhase = new AttackPhase();
+    DefensePhase defensePhase = new DefensePhase();
 
     // CTOR's
     public CardGame() {
@@ -32,9 +35,17 @@ public class CardGame {
         this.enemyBattleField = enemyBattleField;
     }
 
+
+    // TODO: ADD GAME LOGIC IN ORDER HERE
     public void startGame() {
-        // TODO: ADD GAME LOGIC IN ORDER HERE
+
         intializeGame();
+        Console.clear();
+//        System.out.println(player.getDeck());
+//        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
+        attackPhase.playerAttackPhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
+            // Defense phase here
+//        }
     }
 
 
@@ -42,31 +53,26 @@ public class CardGame {
         System.out.println(Welcome.welcomeBanner());
         boolean validInput = false;
         while (!validInput) {
-            System.out.print("Enter your name (No more than 10 Characters)");
-            String input = scanner.nextLine().trim().toUpperCase();
+            Prompter prompter = new Prompter(new Scanner(System.in));
+            String input = prompter.prompt("Enter your name (No more than 10 Characters)");
             if (input.length() <= 10) {
                 validInput = true;
                 player.setName(input);
             }
         }
+
         player.setDeck(card.getDeck());
-        System.out.println(player.getDeck());
-    }
+        enemy.setDeck(card.getDeck());
 
-    // Business Methods/Game Logic
-    private static void playerAttackPhase(Player player, Ai enemy) {
-        // TODO: add game logic for player attack phase
-    }
+        Console.clear();
+        try {
+            TimeUnit.SECONDS.sleep(2);  // Sleep for 2 seconds (adjust as needed)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-    private static void playerDefensePhase(Player player, Ai enemy) {
-        // TODO: add logic for player defense phase
+        System.out.println("Everyone has drawn 10 cards");
     }
-
-    private List<Card> initalizeCards() {
-        // TODO: initalize player decks if we cannot make this work in the card class
-        return new ArrayList<>(); // Placeholder
-    }
-
 
     private void displayUpdatedStats() {
         // TODO: Logic to display the udpated stats
@@ -76,10 +82,6 @@ public class CardGame {
         // TODO: LOGIC TO UPDATE THE PLAYER AND AI STATS
         displayUpdatedStats();
     }
-
-
-
-
 
     // Getters Setters
     public Player getPlayer() {

@@ -34,6 +34,7 @@ public class Card {
         setToughness(toughness);
     }
 
+
     //  newInstance of deck
     public ArrayList<Card> getDeck() {
         ArrayList<Card> newDeck = new ArrayList<>();
@@ -55,7 +56,6 @@ public class Card {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return newDeck;
     }
 
