@@ -17,6 +17,7 @@ public class CardGame {
     private final Scanner scanner = new Scanner(System.in);
     private Player player = new Player();
     private Player enemy = new Ai();
+    Card card = new Card();
     private List<Card> playerBattleField = new ArrayList<>();
     private List<Card> enemyBattleField = new ArrayList<>();
 
@@ -48,6 +49,8 @@ public class CardGame {
                 player.setName(input);
             }
         }
+        player.setDeck(card.getDeck());
+        System.out.println(player.getDeck());
     }
 
     // Business Methods/Game Logic

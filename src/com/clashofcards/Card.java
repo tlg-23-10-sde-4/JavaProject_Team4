@@ -39,17 +39,26 @@ public class Card {
         ArrayList<Card> newDeck = new ArrayList<>();
 
         try {
-            List <String> lines = Files.readAllLines(Path.of(dataFilePath));
-            for (String line : lines){
-                String[] tokens = line.split(",");
-                newDeck.add(new Card(Integer.valueOf(tokens[0]), tokens[1], Integer.valueOf(tokens[2]), Integer.valueOf(tokens[3])));
+            List<String> lines = Files.readAllLines(Path.of(dataFilePath));
+
+            Collections.shuffle(lines);
+
+            for (int i = 0; i < 10; i++) {
+                String[] tokens = lines.get(i).split(",");
+                int id = Integer.parseInt(tokens[0].trim());
+                String name = tokens[1].trim();
+                int attack = Integer.parseInt(tokens[2].trim());
+                int defense = Integer.parseInt(tokens[3].trim());
+
+                newDeck.add(new Card(id, name, attack, defense));
             }
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
         return newDeck;
     }
+
 
     //  business method to show full deck to end user
     public void show(){
