@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardGame {
-    Player player = new Player();
-    Player enemy = new Ai();
-    List<Card> playerBattleField = new ArrayList<>();
-    List<Card> enemyBattleField = new ArrayList<>();
+    private Player player = new Player();
+    private Player enemy = new Ai();
+    private List<Card> playerBattleField = new ArrayList<>();
+    private List<Card> enemyBattleField = new ArrayList<>();
 
     // CTOR's
-    public CardGame() {}
+    public CardGame() {
+    }
 
     public CardGame(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
         this.player = player;
