@@ -45,10 +45,9 @@ public class CardGame {
             String input = scanner.nextLine().trim().toUpperCase();
             if (input.length() <= 10) {
                 validInput = true;
-//                player.setName(input);
+                player.setName(input);
             }
         }
-
     }
 
     // Business Methods/Game Logic

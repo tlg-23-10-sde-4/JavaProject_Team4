@@ -63,17 +63,44 @@ public class Player {
         drawCard();
     }
 
-    // Other methods for game mechanics, health modification, etc.
+    // Getter/Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public List<Card> getDeck() {
+        return deck;
+    }
+
+    public void setDeck(List<Card> deck) {
+        this.deck = deck;
     }
 
     public List<Card> getHand() {
         return hand;
     }
 
+    public void setHand(List<Card> hand) {
+        this.hand = hand;
+    }
+
     public List<Card> getGraveyard() {
         return graveyard;
+    }
+
+    public void setGraveyard(List<Card> graveyard) {
+        this.graveyard = graveyard;
     }
 }
