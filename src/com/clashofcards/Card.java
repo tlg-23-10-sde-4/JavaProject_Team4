@@ -100,7 +100,7 @@ public class Card {
 
     @Override
     public String toString(){
-        return String.format("|#: %s - %s   %s/%s\n",getIndex(),getName(),getStrength(),getToughness());
+        return String.format("\n#: %s - %s   %s/%s",getIndex(),getName(),getStrength(),getToughness());
     }
 
 /*    @Override
