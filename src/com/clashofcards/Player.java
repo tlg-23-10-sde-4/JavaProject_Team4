@@ -10,8 +10,8 @@ public class Player {
     private List<Card> hand;
     private List<Card> graveyard;
 
-    public Player() {
-    }
+
+    public Player() {}
 
     public Player(String name) {
         this.name = name;
@@ -22,6 +22,8 @@ public class Player {
         initializeDeck();
         drawInitialCards(7);
     }
+
+
 
     private void initializeDeck() {
         // Add cards to the deck, assuming you have a method to create cards
