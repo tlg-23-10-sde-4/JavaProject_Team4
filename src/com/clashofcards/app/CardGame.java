@@ -10,6 +10,7 @@ import com.clashofcards.renderer.Welcome;
 
 import com.apps.util.Console;
 import com.clashofcards.utils.Helper;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,16 +42,14 @@ public class CardGame {
     public void startGame() {
         intializeGame();
         Console.clear();
-        /*
-         * The methods below are for testing
-         *
-         * playerBattleField.add(player.getDeck().get(0));
-         * player.getDeck().remove(0);
-         * enemyBattleField.add(enemy.getDeck().get(0));
-         * enemyBattleField.add(enemy.getDeck().get(1));
-         * enemy.getDeck().remove(0);
-         * enemy.getDeck().remove(1);
-         */
+        // The methods below are for testing
+
+        playerBattleField.add(player.getDeck().get(0));
+        player.getDeck().remove(0);
+        enemyBattleField.add(enemy.getDeck().get(0));
+        enemyBattleField.add(enemy.getDeck().get(1));
+        enemy.getDeck().remove(0);
+        enemy.getDeck().remove(1);
 
 
 //        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
@@ -86,7 +85,6 @@ public class CardGame {
 
         Helper.delayGame(2);
     }
-
 
 
     private void displayUpdatedStats() {
