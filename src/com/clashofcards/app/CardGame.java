@@ -44,6 +44,7 @@ public class CardGame {
 
 //        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
         attackPhase.playerAttackPhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
+        defensePhase.playerDefensePhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
             // Defense phase here
 //        }
     }
