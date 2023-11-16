@@ -10,6 +10,7 @@ import com.clashofcards.renderer.Welcome;
 
 import com.apps.util.Console;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,10 +26,10 @@ public class CardGame {
     DefensePhase defensePhase = new DefensePhase();
 
     // CTOR's
-    public CardGame() {
+    public CardGame() throws IOException {
     }
 
-    public CardGame(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
+    public CardGame(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) throws IOException {
         this.player = player;
         this.enemy = enemy;
         this.playerBattleField = playerBattleField;
@@ -38,10 +39,9 @@ public class CardGame {
 
     // TODO: ADD GAME LOGIC IN ORDER HERE
     public void startGame() {
-
         intializeGame();
         Console.clear();
-//        System.out.println(player.getDeck());
+
 //        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
         attackPhase.playerAttackPhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
             // Defense phase here
@@ -56,8 +56,8 @@ public class CardGame {
             Prompter prompter = new Prompter(new Scanner(System.in));
             String input = prompter.prompt("Enter your name (No more than 10 Characters)");
             if (input.length() <= 10) {
-                validInput = true;
                 player.setName(input);
+                validInput = true;
             }
         }
 
@@ -65,13 +65,20 @@ public class CardGame {
         enemy.setDeck(card.getDeck());
 
         Console.clear();
+
+        delayGame(1);
+
+        System.out.println("Everyone has drawn 10 cards");
+
+    }
+
+    // DelayGame for given amount of seconds
+    public void delayGame(int seconds) {
         try {
-            TimeUnit.SECONDS.sleep(2);  // Sleep for 2 seconds (adjust as needed)
+            TimeUnit.SECONDS.sleep(seconds);  // Sleep for 2 seconds (adjust as needed)
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Everyone has drawn 10 cards");
     }
 
     private void displayUpdatedStats() {
