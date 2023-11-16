@@ -34,8 +34,6 @@ public class DefensePhase {
                 valid = true;
             }
         }
-
-        // TODO: Add logic for the interactive defense phase
         // You can add code to allow the player to choose cards to defend with or take other defensive actions.
     }
 
