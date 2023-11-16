@@ -41,11 +41,21 @@ public class CardGame {
     public void startGame() {
         intializeGame();
         Console.clear();
+        /*
+         * The methods below are for testing
+         *
+         * playerBattleField.add(player.getDeck().get(0));
+         * player.getDeck().remove(0);
+         * enemyBattleField.add(enemy.getDeck().get(0));
+         * enemyBattleField.add(enemy.getDeck().get(1));
+         * enemy.getDeck().remove(0);
+         * enemy.getDeck().remove(1);
+         */
+
 
 //        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
         attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
 //        defensePhase.playerDefensePhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
-            // Defense phase here
 //        }
     }
 
@@ -63,16 +73,18 @@ public class CardGame {
         }
 
         player.setDeck(card.getDeck());
-        player.setHealth(20);
         enemy.setDeck(card.getDeck());
-        enemy.setHealth(20);
-        Integer h = enemy.getHealth();
+        enemy.setName("Jimbo");
 
         Console.clear();
 
         Helper.delayGame(1);
 
+        System.out.println();
         System.out.println("Everyone has drawn 10 cards");
+        System.out.println();
+
+        Helper.delayGame(2);
     }
 
 

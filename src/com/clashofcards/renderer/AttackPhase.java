@@ -9,7 +9,9 @@ import com.clashofcards.utils.Helper;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 
 public class AttackPhase {
@@ -32,16 +34,6 @@ public class AttackPhase {
         playCard(player.getDeck(), playerBattleField); // player plays a card
 
         displayer.updateBattleField(enemyBattleField, playerBattleField, player);
-
-        boolean valid = false;
-        while (!valid) {
-            System.out.println("Console clear test");
-            Prompter prompter = new Prompter(new Scanner(System.in));
-            String name = prompter.prompt("Please enter your name: ");
-            if (name.length() < 20) {
-                valid = true;
-            }
-        }
     }
 
     private void playCard(List<Card> playerCards, List<Card> playerBattlefield) {
@@ -92,6 +84,12 @@ public class AttackPhase {
                                 calculateBattleResults(enemyBlockingCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField);
                             }
                         }
+                        System.out.println(enemy.getName() + " has no cards to block with");
+                        Helper.delayGame(2);
+                        System.out.println(enemy.getName() + " took " + selectedCard.getToughness() + " damage!");
+                        enemy.setHealth(enemy.getHealth() - selectedCard.getToughness());
+                        Helper.delayGame(2);
+
                         valid = true;
                     } else {
                         System.out.println("Invalid card ID. Please enter a valid ID.");
@@ -112,10 +110,10 @@ public class AttackPhase {
                 valid = true;
                 if (attack.equals("y")) {
                     System.out.println(p.getName() + " chose to attack!");
-                    Helper.delayGame(1);
+                    Helper.delayGame(2);
                     wantsToAttack = true;
                 } else {
-                    Helper.delayGame(1);
+                    Helper.delayGame(2);
                     System.out.println(p.getName() + " chose not to attack");
                 }
             } else {
@@ -127,9 +125,19 @@ public class AttackPhase {
 
     private Card enemyBlock(List<Card> enemyBattleField, Card playerAttackingCard) {
         Card chosenCard = null;
+        List<Card> eligibleCards = enemyBattleField.stream()
+                .filter(card -> card.getToughness() < playerAttackingCard.getStrength())
+                .collect(Collectors.toList());
         for(Card card : enemyBattleField) {
             if(card.getToughness() >= playerAttackingCard.getStrength()) {
                 chosenCard = card;
+            } else {
+                if (!eligibleCards.isEmpty()) {
+                    // If there are eligible cards, choose a random one
+                    Random random = new Random();
+                    int randomIndex = random.nextInt(eligibleCards.size());
+                    chosenCard = eligibleCards.get(randomIndex);
+                }
             }
         }
         return chosenCard;
@@ -151,12 +159,15 @@ public class AttackPhase {
     }
 
     private static void blockAndDestroy(Card enemyCard, Card playerCard, Player p, Ai e, List<Card> enemyBattleField) {
-        System.out.println(e.getName() + "s " + enemyCard.getName() + " has a defense of " + enemyCard.getToughness());
-        Helper.delayGame(1);
         System.out.println(p.getName() + "s " + playerCard.getName() + " has an attack of " + playerCard.getStrength());
         Helper.delayGame(1);
+
+        System.out.println(e.getName() + "s " + enemyCard.getName() + " has a defense of " + enemyCard.getToughness());
+        Helper.delayGame(1);
+
         System.out.println(e.getName() + " blocked " + p.getName() + " with " + enemyCard.getName());
         Helper.delayGame(1);
+
         System.out.println(e.getName() + "s " + enemyCard.getName() + " was destroyed by " + p.getName() + "s " + playerCard.getName());
         enemyBattleField.remove(enemyCard);
     }
