@@ -15,7 +15,8 @@ public class CardTest extends Card {
     Card card4 = new Card(4, "Skeleton", 2, 1);
     Card card5 = new Card(5, "Vampire", 2, 1);
     Card card6 = new Card(6, "Zombie", 2, 1);
-    List<Card> newDeckList = new ArrayList<>();
+    private final List<Card> newDeckList = new ArrayList<>();
+
 
     @Test
     public void showCardsSeparately(){
@@ -36,6 +37,13 @@ public class CardTest extends Card {
 
     @Test
     public void showCardsInCustomHand(){
+        newDeckList.add(card1);
+//        newDeckList.add(card2);
+//        newDeckList.add(card3);
+//        newDeckList.add(card4);
+//        newDeckList.add(card5);
+//        newDeckList.add(card6);
+
             for(Card card : newDeckList){
                 for(String line : card.getImageLines()){
                     System.out.println(line);
