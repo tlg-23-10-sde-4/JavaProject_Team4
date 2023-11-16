@@ -34,7 +34,13 @@ public class CardTest extends Card {
         System.out.println();
     }
 
-
-
+    @Test
+    public void showCardsInCustomHand(){
+            for(Card card : newDeckList){
+                for(String line : card.getImageLines()){
+                    System.out.println(line);
+                }
+            }
+    }
 
 }
