@@ -16,11 +16,19 @@ public class Card {
     private Integer strength;
     private Integer toughness;
 
+    private List<String> imageLines;
+
     //  Deck / Hand / Graveyard vars
     private static final String dataFilePath = "Data/Cards.csv";
     public List<Card> deck;
     public List<Card> hand;
     public List<Card> graveyard;
+
+    //  Fields to work with text documents
+
+
+
+
 
 
     //  constructors for Card
@@ -32,7 +40,15 @@ public class Card {
         setName(name);
         setStrength(strength);
         setToughness(toughness);
+        try {
+            this.imageLines = Files.readAllLines(Path.of("Data/" + getName() + ".txt"));
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
+
+
 
 
     //  newInstance of deck
@@ -63,6 +79,21 @@ public class Card {
     //  business method to show full deck to end user
     public void show() {
         System.out.println(deck);
+    }
+
+    public void print(Card card){
+        for(String line : card.getImageLines()){
+            System.out.println(line);
+        }
+        System.out.printf("#%s %s   ✊ %s ❤ %s\n", card.getIndex(), card.getName(), card.getStrength(), card.getToughness());
+    }
+    // ❤ ✊
+    public void printHand(List <Card> list){
+        for(Card card : list){
+            for(String line : card.getImageLines()){
+                System.out.println(line);
+            }
+        }
     }
 
     //  accessor method
@@ -98,8 +129,36 @@ public class Card {
         this.toughness = toughness;
     }
 
+    public List<String> getImageLines() {
+        return imageLines;
+    }
+
+    public void setImageLines(List<String> imageLines) {
+        this.imageLines = imageLines;
+    }
+
+    //    @Override
+//    public String toString(){
+//        return String.format("\n#: %s - %s   %s/%s",getIndex(),getName(),getStrength(),getToughness());
+//    }
+
+
+    //    @Override
+//    public String toString() {
+//        return String.format("| #: %s %s S: %s T: %s |", getIndex(), getName(), getStrength(), getToughness());
+//    }
     @Override
     public String toString() {
-        return String.format("| #:%s  %s  S:%s  T:%s |", getIndex(), getName(), getStrength(), getToughness());
+        return String.format(
+                         "---------------------" +
+                        "| #: %s     %s   |" +
+                        "|                   |" +
+                        "|                   |" +
+                        "|                   |" +
+                        "|                   |" +
+                        "|                   |" +
+                        "| S: %s    |    T: %s |" +
+                        "---------------------\n",
+                getIndex(), getName(), getStrength(), getToughness());
     }
 }
