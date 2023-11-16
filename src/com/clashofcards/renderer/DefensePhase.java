@@ -1,5 +1,10 @@
 package com.clashofcards.renderer;
 
+import com.apps.util.Prompter;
+import com.clashofcards.Ai;
+import com.clashofcards.Card;
+import com.clashofcards.Player;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,12 +13,13 @@ public class DefensePhase {
     /**
      * Conducts the player's defense phase in the card game.
      *
-     * @param player           The player participating in the defense phase.
-     * @param enemy            The AI opponent.
+     * @param player            The player participating in the defense phase.
+     * @param enemy             The AI opponent.
      * @param playerBattlefield The current state of the player's battlefield.
      * @param enemyBattlefield  The current state of the enemy's battlefield.
      */
-    public void playerDefensePhase(Player player, AI enemy, List<Card> playerBattlefield, List<Card> enemyBattlefield) {
+
+    public void playerDefensePhase(Player player, Ai enemy, List<Card> playerBattlefield, List<Card> enemyBattlefield) {
         displayEnemyBattlefield(enemyBattlefield);
         showPlayerBattlefield(playerBattlefield);
         showPlayerHand(player.getDeck());
@@ -60,7 +66,7 @@ public class DefensePhase {
      *
      * @param playerHand The current state of the player's hand.
      */
-    private void showPlayerHand(List<card> playerHand) {
+    private void showPlayerHand(List<Card> playerHand) {
         System.out.println("Player's Hand:");
         int cardCount = 0;
         for (Card card : playerHand) {
@@ -83,3 +89,4 @@ public class DefensePhase {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+}

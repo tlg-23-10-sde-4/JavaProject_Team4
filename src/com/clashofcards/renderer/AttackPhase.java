@@ -4,51 +4,11 @@ import com.clashofcards.Ai;
 import com.clashofcards.Card;
 import com.clashofcards.Player;
 import com.apps.util.Prompter;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.nio.file.Files.readAllLines;
 
 public class AttackPhase {
-    private static final List<String> enemyBattleFieldText;
-    private static final List<String> yourBattleFieldText;
-    private static final List<String> yourHandText;
-
-    static {
-        try {
-            enemyBattleFieldText = readAllLines(Path.of("images/EnemyBattlefield.txt"));
-            yourBattleFieldText = readAllLines(Path.of("images/YourBattlefield.txt"));
-            yourHandText = readAllLines(Path.of("images/YourHand.txt"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public AttackPhase() throws IOException {
-    }
-
-    public static void printEnemyBattlefield() {
-        for(String line : enemyBattleFieldText) {
-            System.out.println(line);
-        }
-    }
-
-    public static void printYourBattleField() {
-        for(String line : yourBattleFieldText) {
-            System.out.println(line);
-        }
-    }
-
-    public static void printYourHand() {
-        for(String line : yourHandText) {
-            System.out.println(line);
-        }
-    }
-
 
     public void playerAttackPhase(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
         displayEnemyBattleField(enemyBattleField);
@@ -90,10 +50,10 @@ public class AttackPhase {
     private void displayEnemyBattleField(List<Card> enemyBattleField) {
         System.out.println();
         if (enemyBattleField.isEmpty()) {
-            printEnemyBattlefield();
+            PrintBattlefieldText.printEnemyBattlefield();
             System.out.println("----Enemy Has not played any cards yet----");
         } else {
-            printEnemyBattlefield();
+            PrintBattlefieldText.printEnemyBattlefield();
             for (Card card : enemyBattleField) {
                 System.out.println(card + " ");
             }
@@ -104,12 +64,12 @@ public class AttackPhase {
     private void showPlayerBattlefield(List<Card> playerBattlefield) {
         if (playerBattlefield.isEmpty()) {
             System.out.println("---Your battlefield is empty---");
-            printYourBattleField();
+            PrintBattlefieldText.printYourBattleField();
         } else {
             for (Card card : playerBattlefield) {
                 System.out.print(card + "   ");
             }
-            printYourBattleField();
+            PrintBattlefieldText.printYourBattleField();
             System.out.println("\n"+"\n"+"\n"+"\n");
         }
     }
@@ -118,6 +78,6 @@ public class AttackPhase {
         for (Card card : playerHand) {
             System.out.print(card + "   ");
         }
-        printYourHand();
+        PrintBattlefieldText.printYourHand();
     }
 }
