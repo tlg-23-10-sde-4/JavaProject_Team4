@@ -18,9 +18,9 @@ public class Card {
 
     //  Deck / Hand / Graveyard vars
     private static final String dataFilePath = "Data/Cards.csv";
-    public ArrayList<Card> deck;
-    public ArrayList<Card> hand;
-    public ArrayList<Card> graveyard;
+    public List<Card> deck;
+    public List<Card> hand;
+    public List<Card> graveyard;
 
 
     //  constructors for Card
@@ -98,28 +98,8 @@ public class Card {
         this.toughness = toughness;
     }
 
-//    @Override
-//    public String toString(){
-//        return String.format("\n#: %s - %s   %s/%s",getIndex(),getName(),getStrength(),getToughness());
-//    }
-
-
-    //    @Override
-//    public String toString() {
-//        return String.format("| #: %s %s S: %s T: %s |", getIndex(), getName(), getStrength(), getToughness());
-//    }
     @Override
     public String toString() {
-        return String.format(
-                         "---------------------" +
-                        "| #: %s     %s   |" +
-                        "|                   |" +
-                        "|                   |" +
-                        "|                   |" +
-                        "|                   |" +
-                        "|                   |" +
-                        "| S: %s    |    T: %s |" +
-                        "---------------------\n",
-                getIndex(), getName(), getStrength(), getToughness());
+        return String.format("| #:%s  %s  S:%s  T:%s |", getIndex(), getName(), getStrength(), getToughness());
     }
 }
