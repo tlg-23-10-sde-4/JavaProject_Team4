@@ -1,4 +1,4 @@
-package com.clashofcards.renderer;
+package com.clashofcards.utils;
 
 import java.io.IOException;
 import java.nio.file.Path;

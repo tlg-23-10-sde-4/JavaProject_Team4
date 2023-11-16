@@ -9,7 +9,7 @@ import com.clashofcards.renderer.DefensePhase;
 import com.clashofcards.renderer.Welcome;
 
 import com.apps.util.Console;
-
+import com.clashofcards.utils.Helper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,9 @@ public class CardGame {
     private Player enemy = new Ai();
     private List<Card> playerBattleField = new ArrayList<>();
     private List<Card> enemyBattleField = new ArrayList<>();
-    Card card = new Card();
-    AttackPhase attackPhase = new AttackPhase();
-    DefensePhase defensePhase = new DefensePhase();
+    private final Card card = new Card();
+    private final AttackPhase attackPhase = new AttackPhase();
+    private final DefensePhase defensePhase = new DefensePhase();
 
     // CTOR's
     public CardGame() throws IOException {
@@ -44,7 +44,7 @@ public class CardGame {
 
 //        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
         attackPhase.playerAttackPhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
-        defensePhase.playerDefensePhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
+//        defensePhase.playerDefensePhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
             // Defense phase here
 //        }
     }
@@ -67,20 +67,12 @@ public class CardGame {
 
         Console.clear();
 
-        delayGame(1);
+        Helper.delayGame(1);
 
         System.out.println("Everyone has drawn 10 cards");
-
     }
 
-    // DelayGame for given amount of seconds
-    public void delayGame(int seconds) {
-        try {
-            TimeUnit.SECONDS.sleep(seconds);  // Sleep for 2 seconds (adjust as needed)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     private void displayUpdatedStats() {
         // TODO: Logic to display the udpated stats
