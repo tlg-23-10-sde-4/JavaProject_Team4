@@ -36,8 +36,8 @@ public class Card {
 
 
     //  newInstance of deck
-    public ArrayList<Card> getDeck() {
-        ArrayList<Card> newDeck = new ArrayList<>();
+    public List<Card> getDeck() {
+        List<Card> newDeck = new ArrayList<>();
 
         try {
             List<String> lines = Files.readAllLines(Path.of(dataFilePath));
