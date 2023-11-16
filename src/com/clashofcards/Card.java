@@ -88,6 +88,13 @@ public class Card {
         System.out.printf("#%s %s   ✊ %s ❤ %s\n", card.getIndex(), card.getName(), card.getStrength(), card.getToughness());
     }
     // ❤ ✊
+    public void printHand(List <Card> list){
+        for(Card card : list){
+            for(String line : card.getImageLines()){
+                System.out.println(line);
+            }
+        }
+    }
 
     //  accessor method
     public Integer getIndex() {
