@@ -1,6 +1,4 @@
-package com.clashofcards;
-
-import java.util.List;
+package com.clashofcards.models;
 
 public class Ai extends Player {
     public Ai() {

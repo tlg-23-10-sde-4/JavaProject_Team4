@@ -1,10 +1,5 @@
 package com.clashofcards.utils;
 
-import com.clashofcards.Card;
-import com.clashofcards.Player;
-import com.clashofcards.renderer.AttackPhase;
-
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Helper {

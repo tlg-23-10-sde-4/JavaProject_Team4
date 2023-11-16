@@ -1,9 +1,9 @@
 package com.clashofcards.app;
 
 import com.apps.util.Prompter;
-import com.clashofcards.Ai;
-import com.clashofcards.Card;
-import com.clashofcards.Player;
+import com.clashofcards.models.Ai;
+import com.clashofcards.models.Card;
+import com.clashofcards.models.Player;
 import com.clashofcards.renderer.AttackPhase;
 import com.clashofcards.renderer.DefensePhase;
 import com.clashofcards.renderer.Welcome;
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class CardGame {
     private Player player = new Player();

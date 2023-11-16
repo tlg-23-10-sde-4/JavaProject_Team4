@@ -2,7 +2,7 @@
  * Class to test Card and it's methods
  */
 
-import com.clashofcards.Card;
+import com.clashofcards.models.Card;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
 package com.clashofcards.utils;
 
 import com.apps.util.Console;
-import com.clashofcards.Card;
-import com.clashofcards.Player;
+import com.clashofcards.models.Card;
+import com.clashofcards.models.Player;
 
 import java.util.List;
 
