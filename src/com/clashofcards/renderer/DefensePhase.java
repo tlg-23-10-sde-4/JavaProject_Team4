@@ -4,22 +4,13 @@ import com.apps.util.Prompter;
 import com.clashofcards.Ai;
 import com.clashofcards.Card;
 import com.clashofcards.Player;
-
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
-public class DefensePhase {
+public class DefensePhase{
 
-    /**
-     * Conducts the player's defense phase in the card game.
-     *
-     * @param player            The player participating in the defense phase.
-     * @param enemy             The AI opponent.
-     * @param playerBattlefield The current state of the player's battlefield.
-     * @param enemyBattlefield  The current state of the enemy's battlefield.
-     */
-
-    public void playerDefensePhase(Player player, Ai enemy, List<Card> playerBattlefield, List<Card> enemyBattlefield) {
+    public void DefensePhase(Player player, Ai enemy, List<Card> playerBattlefield, List<Card> enemyBattlefield) {
         displayEnemyBattlefield(enemyBattlefield);
         showPlayerBattlefield(playerBattlefield);
         showPlayerHand(player.getDeck());
@@ -33,15 +24,22 @@ public class DefensePhase {
             if (name.length() < 20) {
                 valid = true;
             }
+
         }
-        // You can add code to allow the player to choose cards to defend with or take other defensive actions.
+
+        // Allow the AI to choose a card for defense
+       // Card aiChosenCard = chooseCardForDefense(enemyHand);
+        // Now you can use aiChosenCard to defend against the player's attack
+        // Add your defensive logic here...
+
+    }
+    private Card chooseCardForDefense(List<Card> hand) {
+        // Simple AI logic: Randomly choose a card from the hand
+        Random random = new Random();
+        int randomIndex = random.nextInt(hand.size());
+        return hand.get(randomIndex);
     }
 
-    /**
-     * Displays the enemy's battlefield.
-     *
-     * @param enemyBattlefield The current state of the enemy's battlefield.
-     */
     private void displayEnemyBattlefield(List<Card> enemyBattlefield) {
         // TODO: Implement logic to display the enemy's battlefield
         for (Card card : enemyBattlefield) {
@@ -50,20 +48,15 @@ public class DefensePhase {
         System.out.println();
     }
 
-    /**
-     * Displays the player's battlefield.
-     *
-     * @param playerBattlefield The current state of the player's battlefield.
-     */
     private void showPlayerBattlefield(List<Card> playerBattlefield) {
         // TODO: Implement logic to display the player's battlefield
+        for (Card card : playerBattlefield) {
+            System.out.println(card + "\n");
+        }
+        System.out.println();
     }
 
-    /*
-     * Displays the player's hand.
-     *
-     * @param playerHand The current state of the player's hand.
-     */
+
     private void showPlayerHand(List<Card> playerHand) {
         System.out.println("Player's Hand:");
         int cardCount = 0;
