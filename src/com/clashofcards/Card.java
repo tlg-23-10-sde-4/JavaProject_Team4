@@ -122,7 +122,7 @@ public class Card {
     }
 
     public Integer getToughness() {
-        return toughness;
+        return this.toughness;
     }
 
     public void setToughness(Integer toughness) {

@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CardGame {
     private Player player = new Player();
-    private Player enemy = new Ai();
+    private Ai enemy = new Ai();
     private List<Card> playerBattleField = new ArrayList<>();
     private List<Card> enemyBattleField = new ArrayList<>();
     private final Card card = new Card();
@@ -29,7 +29,7 @@ public class CardGame {
     public CardGame() throws IOException {
     }
 
-    public CardGame(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) throws IOException {
+    public CardGame(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) throws IOException {
         this.player = player;
         this.enemy = enemy;
         this.playerBattleField = playerBattleField;
@@ -41,11 +41,21 @@ public class CardGame {
     public void startGame() {
         intializeGame();
         Console.clear();
+        /*
+         * The methods below are for testing
+         *
+         * playerBattleField.add(player.getDeck().get(0));
+         * player.getDeck().remove(0);
+         * enemyBattleField.add(enemy.getDeck().get(0));
+         * enemyBattleField.add(enemy.getDeck().get(1));
+         * enemy.getDeck().remove(0);
+         * enemy.getDeck().remove(1);
+         */
+
 
 //        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
-        attackPhase.playerAttackPhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
+        attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
 //        defensePhase.playerDefensePhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
-            // Defense phase here
 //        }
     }
 
@@ -64,12 +74,17 @@ public class CardGame {
 
         player.setDeck(card.getDeck());
         enemy.setDeck(card.getDeck());
+        enemy.setName("Jimbo");
 
         Console.clear();
 
         Helper.delayGame(1);
 
+        System.out.println();
         System.out.println("Everyone has drawn 10 cards");
+        System.out.println();
+
+        Helper.delayGame(2);
     }
 
 
@@ -96,7 +111,7 @@ public class CardGame {
         return enemy;
     }
 
-    public void setEnemy(Player enemy) {
+    public void setEnemy(Ai enemy) {
         this.enemy = enemy;
     }
 

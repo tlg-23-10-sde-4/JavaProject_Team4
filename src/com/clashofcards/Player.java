@@ -77,8 +77,8 @@ public class Player {
         this.health = health;
     }
 
-    public void getHealth(int health) {
-        this.health = health;
+    public Integer getHealth() {
+        return health;
     }
 
     public List<Card> getDeck() {
