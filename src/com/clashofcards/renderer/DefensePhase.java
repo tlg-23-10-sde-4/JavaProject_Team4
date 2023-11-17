@@ -4,8 +4,6 @@ import com.apps.util.Prompter;
 import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
-import com.clashofcards.models.Ai;
-import com.clashofcards.models.Card;
 import com.clashofcards.utils.BattleFieldDisplay;
 import com.clashofcards.utils.Helper;
 
@@ -15,13 +13,13 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class DefensePhase {
+public class DefensePhase{
 
     BattleFieldDisplay displayer = new BattleFieldDisplay();
     Prompter prompter = new Prompter(new Scanner(System.in));
     private Object Player;
 
-    public void aiBlockPhase(Player Ai, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
+    public void aiBlockPhase (Player Ai, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
         displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
 
         if (!playerBattleField.isEmpty()) {
@@ -180,4 +178,35 @@ public class DefensePhase {
         System.out.println(enemy.getName() + "'s " + enemyCard.getName() + " was destroyed by " + player.getName() + "'s " + playerCard.getName());
         enemyBattleField.remove(enemyCard);
     }
-}
+        /*
+        public static void main(String[] args) {
+            // Implementation of the main method can be added if needed
+
+            class BattleFieldDisplay {
+                // Implementation of BattleFieldDisplay can be added if needed
+            }
+
+            class Prompter {
+                // Implementation of Prompter can be added if needed
+            }
+
+            class Helper {
+                void delayGame(int seconds) {
+                    // Implementation of delayGame can be added if needed
+                }
+            }
+
+            class Card {
+                // Implementation of Card class can be added if needed
+            }
+
+            class Player {
+                // Implementation of Player class can be added if needed
+            }
+
+            class AI {
+                // Implementation of AI class can be added if needed
+            }
+        }
+
+         */
