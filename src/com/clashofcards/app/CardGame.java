@@ -84,47 +84,4 @@ public class CardGame {
 
         Helper.delayGame(2);
     }
-
-
-    private void displayUpdatedStats() {
-        // TODO: Logic to display the udpated stats
-    }
-
-    private void updatePlayersStats(int damage) {
-        // TODO: LOGIC TO UPDATE THE PLAYER AND AI STATS
-        displayUpdatedStats();
-    }
-
-    // Getters Setters
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public Player getEnemy() {
-        return enemy;
-    }
-
-    public void setEnemy(Ai enemy) {
-        this.enemy = enemy;
-    }
-
-    public List<Card> getPlayerBattleField() {
-        return playerBattleField;
-    }
-
-    public void setPlayerBattleField(List<Card> playerBattleField) {
-        this.playerBattleField = playerBattleField;
-    }
-
-    public List<Card> getEnemyBattleField() {
-        return enemyBattleField;
-    }
-
-    public void setEnemyBattleField(List<Card> enemyBattleField) {
-        this.enemyBattleField = enemyBattleField;
-    }
 }

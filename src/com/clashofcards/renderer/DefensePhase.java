@@ -4,9 +4,8 @@ import com.apps.util.Prompter;
 import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
-import com.clashofcards.Ai;
-import com.clashofcards.Card;
-import com.clashofcards.Player;
+import com.clashofcards.models.Ai;
+import com.clashofcards.models.Card;
 import com.clashofcards.utils.BattleFieldDisplay;
 import com.clashofcards.utils.Helper;
 
