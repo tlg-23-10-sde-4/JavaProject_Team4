@@ -5,6 +5,7 @@ import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
 import com.clashofcards.utils.BattleFieldDisplay;
+import com.clashofcards.utils.Game;
 
 import java.util.List;
 import java.util.Scanner;
@@ -22,8 +23,10 @@ public class DefensePhase {
 
         displayer.updateBattleField(enemyBattleField, playerBattleField, player);
 
-        if (!enemy.getDeck().isEmpty()) {
+        if (!enemy.getHand().isEmpty()) {
+            Game.delayGame(2);
             enemy.playCard(prompter, enemyBattleField); // player plays a card
+            Game.delayGame(2);
         }
 
         displayer.updateBattleField(enemyBattleField, playerBattleField, player);

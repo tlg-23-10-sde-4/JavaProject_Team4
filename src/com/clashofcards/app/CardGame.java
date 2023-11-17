@@ -57,7 +57,7 @@ public class CardGame {
         System.out.println(Welcome.welcomeBanner() + "\n" + "\n");
         boolean validInput = false;
         while (!validInput) {
-            String input = prompter.prompt("Enter your name (No more than 10 Characters)");
+            String input = prompter.prompt("    Enter your name (No more than 10 Characters)");
             if (input.length() <= 10) {
                 player.setName(input);
                 validInput = true;
@@ -71,7 +71,7 @@ public class CardGame {
         Game.delayGame(1);
 
         System.out.println();
-        System.out.println("Everyone has drawn 10 cards");
+        System.out.println("   Everyone has drawn 10 cards");
         System.out.println();
 
         Game.delayGame(2);
@@ -100,13 +100,13 @@ public class CardGame {
             }
 
             // Ask the user to press a key or input something to continue
-            prompter.prompt("Press Enter to continue...");
+            prompter.prompt("   Press Enter to continue...");
         }
     }
 
     private boolean askForInstructions() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Would you like to see instructions? (Y/N): ");
+        System.out.print("   Would you like to see instructions? (Y/N): ");
         String input = scanner.next().toUpperCase();
         return input.equals("Y");
     }

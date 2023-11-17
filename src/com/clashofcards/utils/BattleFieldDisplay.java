@@ -35,14 +35,14 @@ public class BattleFieldDisplay {
 
     private void showPlayerHand(List<Card> playerHand) {
         card.printCards(playerHand);
-
         PrintBattlefieldText.printYourHand();
+        System.out.println("\n" + "\n");
     }
 
     public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player) {
         Console.clear();
         displayEnemyBattleField(enemyBattleField);
         showPlayerBattlefield(playerBattleField);
-        showPlayerHand(player.getDeck());
+        showPlayerHand(player.getHand());
     }
 }

@@ -14,12 +14,12 @@ public class CardTest extends Card {
 
     @Before
     public void init() {
-        newDeckList.add(new Card("01", "Demon", 2, 1));
-        newDeckList.add(new Card("02", "Fairy", 2, 1));
-        newDeckList.add(new Card("03", "Goblin", 2, 1));
-        newDeckList.add(new Card("04", "Skeleton", 2, 1));
-        newDeckList.add(new Card("05", "Vampire", 2, 1));
-        newDeckList.add(new Card("06", "Zombie", 2, 1));
+        newDeckList.add(new Card(11, "Demon", 2, 1));
+        newDeckList.add(new Card(12, "Fairy", 2, 1));
+        newDeckList.add(new Card(13, "Goblin", 2, 1));
+        newDeckList.add(new Card(14, "Skeleton", 2, 1));
+        newDeckList.add(new Card(15, "Vampire", 2, 1));
+        newDeckList.add(new Card(16, "Zombie", 2, 1));
     }
 
     @Test
