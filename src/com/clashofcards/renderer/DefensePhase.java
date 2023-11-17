@@ -14,25 +14,23 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class DefensePhase{
-
     BattleFieldDisplay displayer = new BattleFieldDisplay();
     Prompter prompter = new Prompter(new Scanner(System.in));
-    private Object Player;
 
-    public void aiBlockPhase (Player Ai, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
-        displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
+    public void aiBlockPhase (Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
 
         if (!playerBattleField.isEmpty()) {
-            boolean wantsToAttack = promptBlock(playerBattleField, Ai, enemyBattleField);
-            displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
+            boolean wantsToAttack = promptBlock(playerBattleField, player, enemyBattleField);
+            displayer.updateBattleField(enemyBattleField, playerBattleField, player);
             if (wantsToAttack) {
-                blockWithCard(playerBattleField, Ai, enemyBattleField, Player, enemy);
+                blockWithCard(playerBattleField, player, enemyBattleField, enemy);
             }
         }
 
-        displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
-        playCard(Ai.getDeck(), playerBattleField);
-        displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
+        playCard(player.getDeck(), playerBattleField);
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
     }
 
     private void blockWithCard(List<Card> playerBattleField, com.clashofcards.Player ai, List<Card> enemyBattleField, Object player, com.clashofcards.Player enemy) {
