@@ -19,36 +19,33 @@ public class CardTest extends Card {
 
 
     @Test
-    public void showCardsSeparately(){
-       // System.out.println(deck);
-        card1.print(card1);
+    public void showCardsSeparately() {
+        // System.out.println(deck);
+        card1.print();
         System.out.println();
-        card2.print(card2);
+        card2.print();
         System.out.println();
-        card3.print(card3);
+        card3.print();
         System.out.println();
-        card4.print(card4);
+        card4.print();
         System.out.println();
-        card5.print(card5);
+        card5.print();
         System.out.println();
-        card6.print(card6);
+        card6.print();
         System.out.println();
     }
 
     @Test
-    public void showCardsInCustomHand(){
+    public void showCardsInCustomHand() {
         newDeckList.add(card1);
-//        newDeckList.add(card2);
-//        newDeckList.add(card3);
-//        newDeckList.add(card4);
-//        newDeckList.add(card5);
-//        newDeckList.add(card6);
+        newDeckList.add(card2);
+        newDeckList.add(card3);
+        newDeckList.add(card4);
+        newDeckList.add(card5);
+        newDeckList.add(card6);
 
-            for(Card card : newDeckList){
-                for(String line : card.getImageLines()){
-                    System.out.println(line);
-                }
-            }
+        for (Card card : newDeckList) {
+            card.print();
+        }
     }
-
 }
