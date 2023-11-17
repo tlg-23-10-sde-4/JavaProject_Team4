@@ -15,7 +15,7 @@ public class BattleFieldDisplay {
         } else {
             PrintBattlefieldText.printEnemyBattlefield();
             for (Card card : enemyBattleField) {
-                card.print();
+                System.out.println(card);
             }
         }
         System.out.println("\n" + "\n" + "\n");
@@ -27,7 +27,7 @@ public class BattleFieldDisplay {
             PrintBattlefieldText.printYourBattleField();
         } else {
             for (Card card : playerBattlefield) {
-                card.print();
+                System.out.println(card);
             }
             System.out.println();
             PrintBattlefieldText.printYourBattleField();
@@ -37,7 +37,7 @@ public class BattleFieldDisplay {
 
     private void showPlayerHand(List<Card> playerHand) {
         for (Card card : playerHand) {
-            card.print();
+            System.out.println(card);
         }
         PrintBattlefieldText.printYourHand();
     }

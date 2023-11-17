@@ -9,7 +9,7 @@ import com.clashofcards.renderer.DefensePhase;
 import com.clashofcards.renderer.Welcome;
 
 import com.apps.util.Console;
-import com.clashofcards.utils.Helper;
+import com.clashofcards.utils.Game;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,15 +21,13 @@ public class CardGame {
     private Ai enemy = new Ai();
     private List<Card> playerBattleField = new ArrayList<>();
     private List<Card> enemyBattleField = new ArrayList<>();
-    private final Card card = new Card();
     private final AttackPhase attackPhase = new AttackPhase();
     private final DefensePhase defensePhase = new DefensePhase();
 
     // CTOR's
-    public CardGame() throws IOException {
-    }
+    public CardGame() {}
 
-    public CardGame(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) throws IOException {
+    public CardGame(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
         this.player = player;
         this.enemy = enemy;
         this.playerBattleField = playerBattleField;
@@ -42,8 +40,8 @@ public class CardGame {
 //        weclcome();
         intializeGame();
         Console.clear();
-        // The methods below are for testing
 
+        // The methods below are for testing
         playerBattleField.add(player.getDeck().get(0));
         player.getDeck().remove(0);
         enemyBattleField.add(enemy.getDeck().get(0));
@@ -71,19 +69,17 @@ public class CardGame {
             }
         }
 
-        player.setDeck(card.getDeck());
-        enemy.setDeck(card.getDeck());
         enemy.setName("Jimbo");
 
         Console.clear();
 
-        Helper.delayGame(1);
+        Game.delayGame(1);
 
         System.out.println();
         System.out.println("Everyone has drawn 10 cards");
         System.out.println();
 
-        Helper.delayGame(2);
+        Game.delayGame(2);
     }
 
     private void weclcome() {
