@@ -40,23 +40,16 @@ public class CardGame {
 
 
     public void startGame() {
-        weclcome();
-        intializeGame();
-        Console.clear();
+        weclcome(); // Welcome the player
+        intializeGame(); // Initialize the game
 
-        // The methods below are for testing
-        playerBattleField.add(player.getDeck().get(0));
-        player.getDeck().remove(0);
-        enemyBattleField.add(enemy.getDeck().get(0));
-        enemyBattleField.add(enemy.getDeck().get(1));
-        enemy.getDeck().remove(0);
-        enemy.getDeck().remove(1);
-
-
-        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
+        // Run the game loop until conditions are met
+        while (isGameOngoing()) {
             attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
             defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
         }
+
+        endGame(); // End the game
     }
 
 
@@ -117,5 +110,54 @@ public class CardGame {
         System.out.print("Would you like to see instructions? (Y/N): ");
         String input = scanner.next().toUpperCase();
         return input.equals("Y");
+    }
+
+    private boolean isGameOngoing() {
+        return player.getHealth() > 0 && enemy.getHealth() > 0;
+    }
+
+    private void endGame() {
+
+    }
+
+    // GETTERS AND SETTERS FOR TESTING ONLY
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Ai getEnemy() {
+        return enemy;
+    }
+
+    public void setEnemy(Ai enemy) {
+        this.enemy = enemy;
+    }
+
+    public List<Card> getPlayerBattleField() {
+        return playerBattleField;
+    }
+
+    public void setPlayerBattleField(List<Card> playerBattleField) {
+        this.playerBattleField = playerBattleField;
+    }
+
+    public List<Card> getEnemyBattleField() {
+        return enemyBattleField;
+    }
+
+    public void setEnemyBattleField(List<Card> enemyBattleField) {
+        this.enemyBattleField = enemyBattleField;
+    }
+
+    public AttackPhase getAttackPhase() {
+        return attackPhase;
+    }
+
+    public DefensePhase getDefensePhase() {
+        return defensePhase;
     }
 }
