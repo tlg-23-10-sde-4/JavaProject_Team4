@@ -11,7 +11,6 @@ import com.clashofcards.renderer.Welcome;
 import com.apps.util.Console;
 import com.clashofcards.utils.Game;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -117,7 +116,7 @@ public class CardGame {
     }
 
     private void endGame() {
-
+        Console.clear();
     }
 
     // GETTERS AND SETTERS FOR TESTING ONLY

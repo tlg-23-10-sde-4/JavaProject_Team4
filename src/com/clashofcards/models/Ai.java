@@ -112,36 +112,3 @@ public class Ai extends Player {
 
     }
 }
-
-
-//                while (!valid) {
-//        String cardIndexStr = prompter.prompt("Enter the ID of the card you want to attack with from your battlefield!(13): ");
-//        try {
-//            int cardIndex = Integer.parseInt(cardIndexStr);
-//            for (Card selectedCard : playerBattlefield) {
-//                if (selectedCard.getIndex().equals(cardIndex)) {
-//                    System.out.println(p.getName() + " chose to attack with: " + selectedCard.getName());
-//                    Game.delayGame(1);
-//
-//                    if (!enemyBattleField.isEmpty()) {
-//                        Card enemyBlockingCard = enemy.enemyBlock(enemyBattleField, selectedCard);
-//                        if (enemyBlockingCard != null) {
-//                            Game.calculateBattleResults(enemyBlockingCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField);
-//                        }
-//                    }
-//
-//                    System.out.println(enemy.getName() + " has no cards to block with");
-//                    Game.delayGame(2);
-//                    System.out.println(enemy.getName() + " took " + selectedCard.getToughness() + " damage!");
-//                    enemy.setHealth(enemy.getHealth() - selectedCard.getToughness());
-//                    Game.delayGame(2);
-//
-//                    valid = true;
-//                } else {
-//                    System.out.println("Invalid card ID. Please enter a valid ID.");
-//                }
-//            }
-//        } catch (NumberFormatException e) {
-//            System.out.println("Invalid input. Please enter a valid number.");
-//        }
-//    }
