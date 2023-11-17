@@ -1,40 +1,40 @@
-1, Goblin, 3, 2
-2, Zombie, 2, 2
-3, Vampire, 4, 2
-4, Werewolf, 4, 3
-5, Knight, 3, 6
-6, Wizard, 6, 2
-7, Orc, 4, 4
-8, Elf, 4, 3
-9, Demon, 6, 6
-10, Angel, 4, 6
-11, Dragon, 6, 7
-12, Witch, 4, 3
-13, Fairy, 4, 4
-14, Goblin, 3, 2
-15, Orc, 4, 4
-16, Elf, 4, 3
-17, Knight, 3, 6
-18, Werewolf, 4, 3
-19, Orc, 4, 4
-20, Demon, 6, 6
-21, Vampire, 4, 2
-22, Goblin, 3, 2
-23, Zombie, 2, 2
-24, Orc, 4, 4
-25, Dragon, 6, 7
-26, Knight, 3, 6
-27, Wizard, 6, 2
-28, Witch, 4, 3
-29, Fairy, 4, 4
-30, Elf, 4, 3
-31, Orc, 4, 4
-32, Werewolf, 4, 3
-33, Goblin, 3, 2
-34, Zombie, 2, 2
-35, Vampire, 4, 2
-36, Werewolf, 4, 3
-37, Demon, 6, 6
-38, Angel, 4, 6
-39, Elemental, 6, 3
-40, Beast, 6, 6
+1,Goblin,3,2
+2,Zombie,2,2
+3,Vampire,4,2
+4,Werewolf,4,3
+5,Knight,3,6
+6,Wizard,6,2
+7,Orc,4,4
+8,Elf,4,3
+9,Demon,6,6
+10,Angel,4,6
+11,Dragon,6,7
+12,Witch,4,3
+13,Fairy,4,4
+14,Goblin,3,2
+15,Orc,4,4
+16,Elf,4,3
+17,Knight,3,6
+18,Werewolf,4,3
+19,Orc,4,4
+20,Demon,6,6
+21,Vampire,4,2
+22,Goblin,3,2
+23,Zombie,2,2
+24,Orc,4,4
+25,Dragon,6,7
+26,Knight,3,6
+27,Wizard,6,2
+28,Witch,4,3
+29,Fairy,4,4
+30,Elf,4,3
+31,Orc,4,4
+32,Werewolf,4,3
+33,Goblin,3,2
+34,Zombie,2,2
+35,Vampire,4,2
+36,Werewolf,4,3
+37,Demon,6,6
+38,Angel,4,6
+39,Elemental,6,3
+40,Beast,6,6

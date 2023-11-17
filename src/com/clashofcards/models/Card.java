@@ -1,8 +1,6 @@
-package com.clashofcards;
+package com.clashofcards.models;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,12 +21,6 @@ public class Card {
     public List<Card> deck;
     public List<Card> hand;
     public List<Card> graveyard;
-
-    //  Fields to work with text documents
-
-
-
-
 
 
     //  constructors for Card
@@ -81,11 +73,11 @@ public class Card {
         System.out.println(deck);
     }
 
-    public void print(Card card){
-        for(String line : card.getImageLines()){
+    public void print(){
+        for(String line : getImageLines()){
             System.out.println(line);
         }
-        System.out.printf("#%s %s   ✊ %s ❤ %s\n", card.getIndex(), card.getName(), card.getStrength(), card.getToughness());
+        System.out.printf("#%s %s   ✊ %s ❤ %s\n", getIndex(), getName(), getStrength(), getToughness());
     }
     // ❤ ✊
     public void printHand(List <Card> list){
