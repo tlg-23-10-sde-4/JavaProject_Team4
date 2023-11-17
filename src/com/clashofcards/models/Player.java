@@ -33,7 +33,7 @@ public class Player {
 
             for (int i = 0; i < 10; i++) {
                 String[] tokens = lines.get(i).split(",");
-                int id = Integer.parseInt(tokens[0].trim());
+                String id = tokens[0].trim();
                 String name = tokens[1].trim();
                 int attack = Integer.parseInt(tokens[2].trim());
                 int defense = Integer.parseInt(tokens[3].trim());

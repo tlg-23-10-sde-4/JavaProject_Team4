@@ -14,16 +14,44 @@ public class CardTest extends Card {
 
     @Before
     public void init() {
-        newDeckList.add(new Card(1, "Devil", 2, 1));
-        newDeckList.add(new Card(2, "Fairy", 2, 1));
-        newDeckList.add(new Card(3, "Goblin", 2, 1));
-        newDeckList.add(new Card(4, "Skeleton", 2, 1));
-        newDeckList.add(new Card(5, "Vampire", 2, 1));
-        newDeckList.add(new Card(6, "Zombie", 2, 1));
+        newDeckList.add(new Card("01", "Demon", 2, 1));
+        newDeckList.add(new Card("02", "Fairy", 2, 1));
+        newDeckList.add(new Card("03", "Goblin", 2, 1));
+        newDeckList.add(new Card("04", "Skeleton", 2, 1));
+        newDeckList.add(new Card("05", "Vampire", 2, 1));
+        newDeckList.add(new Card("06", "Zombie", 2, 1));
     }
 
     @Test
     public void showHandTest() {
         workingPrintHand(newDeckList);
     }
+
+    @Test
+    public void showCardsInCustomHand() {
+        newDeckList.add(card1);
+     /*   newDeckList.add(card2);
+        newDeckList.add(card3);
+        newDeckList.add(card4);
+        newDeckList.add(card5);
+        newDeckList.add(card6);*/
+
+        for (Card card : newDeckList) {
+            card.print();
+        }
+    }
+
+    @Test
+    public void showWorkingHandMethod(){
+            newDeckList.add(card1);
+            newDeckList.add(card2);
+            newDeckList.add(card3);
+            newDeckList.add(card4);
+            newDeckList.add(card5);
+            newDeckList.add(card6);
+
+        workingPrintHand(newDeckList);
+    }
+
+
 }
