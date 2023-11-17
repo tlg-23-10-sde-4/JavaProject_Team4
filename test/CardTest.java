@@ -36,16 +36,35 @@ public class CardTest extends Card {
     }
 
     @Test
+    public void showHandTest(){
+        workingPrintHand(newDeckList);
+    }
+
+    @Test
     public void showCardsInCustomHand() {
         newDeckList.add(card1);
-        newDeckList.add(card2);
+     /*   newDeckList.add(card2);
         newDeckList.add(card3);
         newDeckList.add(card4);
         newDeckList.add(card5);
-        newDeckList.add(card6);
+        newDeckList.add(card6);*/
 
         for (Card card : newDeckList) {
             card.print();
         }
     }
+
+    @Test
+    public void showWorkingHandMethod(){
+            newDeckList.add(card1);
+            newDeckList.add(card2);
+            newDeckList.add(card3);
+            newDeckList.add(card4);
+            newDeckList.add(card5);
+            newDeckList.add(card6);
+
+        workingPrintHand(newDeckList);
+    }
+
+
 }
