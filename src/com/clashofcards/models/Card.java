@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Card {
     //  Card vars
-    private String index;
+    private Integer index;
     private String name;
     private Integer strength;
     private Integer toughness;
@@ -19,7 +19,7 @@ public class Card {
     public Card() {
     }
 
-    public Card(String index, String name, Integer strength, Integer toughness) {
+    public Card(Integer index, String name, Integer strength, Integer toughness) {
         setIndex(index);
         setName(name);
         setStrength(strength);
@@ -34,6 +34,8 @@ public class Card {
 
     public void printCards(List<Card> list){
         //  loop repeats i times, where "i" is rows in each image
+        String heartSymbol = "\u2665";
+        String fistSymbol = "\u9994";
         int imageRowsNum = 10;
         for (int i = 0; i < imageRowsNum; i++){
 
@@ -44,18 +46,17 @@ public class Card {
             System.out.println();
         }
         for (Card card : list){
-            System.out.printf("id:%s       ✊ %s ❤ %s\t\t", card.getIndex(), card.getStrength(), card.getToughness());
-            //System.out.printf("id:%s.......✊ %s ❤ %s\t\t", card.getIndex(), card.getStrength(), card.getToughness());
+            System.out.printf("id:%s        %s %s %s %s\t\t", card.getIndex(),fistSymbol,card.getStrength(),heartSymbol,card.getToughness());
         }
         System.out.println();
     }
 
     //  accessor method
-    public String getIndex() {
+    public Integer getIndex() {
         return index;
     }
 
-    public void setIndex(String index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 
