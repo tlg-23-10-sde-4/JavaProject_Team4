@@ -103,7 +103,7 @@ public class Player {
                         if(!enemyBattleField.isEmpty()) {
                             Card enemyBlockingCard = enemy.enemyBlock(enemyBattleField, selectedCard);
                             if(enemyBlockingCard != null) {
-                                Game.calculateBattleResults(enemyBlockingCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField);
+                                Game.calculateBattleResults(enemyBlockingCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, false);
                             }
                         }
 

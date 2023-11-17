@@ -17,7 +17,7 @@ public class DefensePhase {
         displayer.updateBattleField(enemyBattleField, playerBattleField, player);
 
         if (!enemyBattleField.isEmpty()) {
-            enemy.attackWithCard(playerBattleField, player,enemyBattleField,enemy,prompter);
+            enemy.attackWithCard(playerBattleField, player, enemyBattleField, enemy, prompter);
         }
 
         displayer.updateBattleField(enemyBattleField, playerBattleField, player);

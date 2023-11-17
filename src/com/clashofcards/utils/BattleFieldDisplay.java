@@ -36,9 +36,10 @@ public class BattleFieldDisplay {
     }
 
     private void showPlayerHand(List<Card> playerHand) {
-        for (Card card : playerHand) {
-            System.out.println(card);
-        }
+       List<String> card = playerHand.get(0).getImageLines();
+          for (int i = 0; i < card.size(); i++) {
+              System.out.println(playerHand.get(i) + " ");
+          }
         PrintBattlefieldText.printYourHand();
     }
 
