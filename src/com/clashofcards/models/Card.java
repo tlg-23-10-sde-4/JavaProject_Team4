@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Card {
     //  Card vars
-    private Integer index;
+    private String index;
     private String name;
     private Integer strength;
     private Integer toughness;
@@ -21,7 +21,7 @@ public class Card {
     public Card() {
     }
 
-    public Card(Integer index, String name, Integer strength, Integer toughness) {
+    public Card(String index, String name, Integer strength, Integer toughness) {
         setIndex(index);
         setName(name);
         setStrength(strength);
@@ -62,18 +62,18 @@ public class Card {
             System.out.println();
         }
         for (Card card : list){
-            System.out.printf("id:%s.......✊ %s ❤ %s\t\t", card.getIndex(), card.getStrength(), card.getToughness());
-            //System.out.printf("id:%s_______✊ %s ❤ %s.....", card.getIndex(), card.getStrength(), card.getToughness());
+            System.out.printf("id:%s       ✊ %s ❤ %s\t\t", card.getIndex(), card.getStrength(), card.getToughness());
+            //System.out.printf("id:%s.......✊ %s ❤ %s\t\t", card.getIndex(), card.getStrength(), card.getToughness());
         }
         System.out.println();
     }
 
     //  accessor method
-    public Integer getIndex() {
+    public String getIndex() {
         return index;
     }
 
-    public void setIndex(Integer index) {
+    public void setIndex(String index) {
         this.index = index;
     }
 
