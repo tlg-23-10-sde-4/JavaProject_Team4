@@ -1,0 +1,8 @@
+Instructions:
+Each player starts with 20HP (Health).
+Player draws random hand size on hand will be 10 cards
+Player plays a card from hand to the battlefield
+Select monster form the battlefield is selected to attack and defending player selects a card to defend is one is present
+Each card has a Strength score this represents attack and a toughness score this represents defense
+When attacking is stronger than defence the weaker monsters are destroyed and the difference is converted into HP damage
+Game ends when one player's health is dropped to 0.

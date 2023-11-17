@@ -12,6 +12,8 @@ import com.apps.util.Console;
 import com.clashofcards.utils.Game;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,9 +25,11 @@ public class CardGame {
     private List<Card> enemyBattleField = new ArrayList<>();
     private final AttackPhase attackPhase = new AttackPhase();
     private final DefensePhase defensePhase = new DefensePhase();
+    Prompter prompter = new Prompter(new Scanner(System.in));
 
     // CTOR's
-    public CardGame() {}
+    public CardGame() {
+    }
 
     public CardGame(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
         this.player = player;
@@ -35,9 +39,8 @@ public class CardGame {
     }
 
 
-    // TODO: ADD GAME LOGIC IN ORDER HERE
     public void startGame() {
-//        weclcome();
+        weclcome();
         intializeGame();
         Console.clear();
 
@@ -50,18 +53,18 @@ public class CardGame {
         enemy.getDeck().remove(1);
 
 
-//        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
-        attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
-//        defensePhase.playerDefensePhase(player, (Ai) enemy, playerBattleField, enemyBattleField);
-//        }
+        while (player.getHealth() > 0 || enemy.getHealth() > 0) {
+            attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
+            defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
+        }
     }
 
 
     private void intializeGame() {
-        System.out.println(Welcome.welcomeBanner());
+        Console.clear();
+        System.out.println(Welcome.welcomeBanner() + "\n" + "\n");
         boolean validInput = false;
         while (!validInput) {
-            Prompter prompter = new Prompter(new Scanner(System.in));
             String input = prompter.prompt("Enter your name (No more than 10 Characters)");
             if (input.length() <= 10) {
                 player.setName(input);
@@ -85,6 +88,34 @@ public class CardGame {
     private void weclcome() {
         System.out.println(Welcome.welcomeBanner());
         System.out.println();
-        // TODO: Add logic to display instructions for the game or start the game
+
+        List<String> instructions = null;
+        try {
+            instructions = Files.readAllLines(Path.of("Data/instructions.txt"));
+        } catch (Exception e) {
+            System.out.println("File was not found");
+            e.printStackTrace();
+        }
+
+
+        boolean userWantsInstructions = askForInstructions();
+
+        if (userWantsInstructions) {
+            if (instructions != null) {
+                for (String line : instructions) {
+                    System.out.println(line);
+                }
+            }
+
+            // Ask the user to press a key or input something to continue
+            prompter.prompt("Press Enter to continue...");
+        }
+    }
+
+    private boolean askForInstructions() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Would you like to see instructions? (Y/N): ");
+        String input = scanner.next().toUpperCase();
+        return input.equals("Y");
     }
 }
