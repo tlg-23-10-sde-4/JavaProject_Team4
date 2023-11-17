@@ -4,16 +4,39 @@ import com.apps.util.Prompter;
 import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
+import com.clashofcards.Ai;
+import com.clashofcards.Card;
+import com.clashofcards.Player;
+import com.clashofcards.utils.BattleFieldDisplay;
+import com.clashofcards.utils.Helper;
+
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class DefensePhase{
 
-    public void DefensePhase(Player player, Ai enemy, List<Card> playerBattlefield, List<Card> enemyBattlefield) {
-        displayEnemyBattlefield(enemyBattlefield);
-        showPlayerBattlefield(playerBattlefield);
-        showPlayerHand(player.getDeck());
+        BattleFieldDisplay displayer = new BattleFieldDisplay();
+        Prompter prompter = new Prompter(new Scanner(System.in));
+    private Object Player;
+
+    public void aiBlockPhase (Player Ai, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
+            displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
+
+            if (!playerBattleField.isEmpty()) {
+                boolean wantsToAttack = promptBlock(playerBattleField, Ai, enemyBattleField);
+                displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
+                if (wantsToAttack) {
+                    blockWithCard(playerBattleField, Ai, enemyBattleField, Player, enemy);
+                }
+            }
+
+            displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
+            playCard(Ai.getDeck(), playerBattleField);
+            displayer.updateBattleField(enemyBattleField, playerBattleField, Ai);
+        }
 
         boolean valid = false;
         while (!valid) {
