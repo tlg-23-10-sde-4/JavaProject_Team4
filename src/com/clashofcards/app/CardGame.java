@@ -39,7 +39,7 @@ public class CardGame {
 
     // TODO: ADD GAME LOGIC IN ORDER HERE
     public void startGame() {
-        weclcome();
+//        weclcome();
         intializeGame();
         Console.clear();
         // The methods below are for testing
@@ -60,6 +60,7 @@ public class CardGame {
 
 
     private void intializeGame() {
+        System.out.println(Welcome.welcomeBanner());
         boolean validInput = false;
         while (!validInput) {
             Prompter prompter = new Prompter(new Scanner(System.in));

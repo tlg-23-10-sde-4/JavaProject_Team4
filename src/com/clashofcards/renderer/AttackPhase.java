@@ -82,6 +82,7 @@ public class AttackPhase {
                                 calculateBattleResults(enemyBlockingCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField);
                             }
                         }
+
                         System.out.println(enemy.getName() + " has no cards to block with");
                         Helper.delayGame(2);
                         System.out.println(enemy.getName() + " took " + selectedCard.getToughness() + " damage!");
