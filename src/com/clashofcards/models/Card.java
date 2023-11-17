@@ -13,15 +13,7 @@ public class Card {
     private String name;
     private Integer strength;
     private Integer toughness;
-
     private List<String> imageLines;
-
-    //  Deck / Hand / Graveyard vars
-    private static final String dataFilePath = "Data/Cards.csv";
-    public List<Card> deck;
-    public List<Card> hand;
-    public List<Card> graveyard;
-
 
     //  constructors for Card
     public Card() {
@@ -40,47 +32,16 @@ public class Card {
         }
     }
 
-
-
-
-    //  newInstance of deck
-    public List<Card> getDeck() {
-        List<Card> newDeck = new ArrayList<>();
-
-        try {
-            List<String> lines = Files.readAllLines(Path.of(dataFilePath));
-
-            Collections.shuffle(lines);
-
-            for (int i = 0; i < 10; i++) {
-                String[] tokens = lines.get(i).split(",");
-                int id = Integer.parseInt(tokens[0].trim());
-                String name = tokens[1].trim();
-                int attack = Integer.parseInt(tokens[2].trim());
-                int defense = Integer.parseInt(tokens[3].trim());
-
-                newDeck.add(new Card(id, name, attack, defense));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return newDeck;
-    }
-
-
     //  business method to show full deck to end user
-    public void show() {
-        System.out.println(deck);
-    }
-
     public void print(){
         for(String line : getImageLines()){
             System.out.println(line);
         }
         System.out.printf("#%s %s   ✊ %s ❤ %s\n", getIndex(), getName(), getStrength(), getToughness());
     }
+
     // ❤ ✊
-    public void printHand(List <Card> list){
+    public void printHand(List<Card> list){
         for(Card card : list){
             for(String line : card.getImageLines()){
                 System.out.println(line);
@@ -125,32 +86,8 @@ public class Card {
         return imageLines;
     }
 
-    public void setImageLines(List<String> imageLines) {
-        this.imageLines = imageLines;
-    }
-
-    //    @Override
-//    public String toString(){
-//        return String.format("\n#: %s - %s   %s/%s",getIndex(),getName(),getStrength(),getToughness());
-//    }
-
-
-    //    @Override
-//    public String toString() {
-//        return String.format("| #: %s %s S: %s T: %s |", getIndex(), getName(), getStrength(), getToughness());
-//    }
     @Override
     public String toString() {
-        return String.format(
-                         "---------------------" +
-                        "| #: %s     %s   |" +
-                        "|                   |" +
-                        "|                   |" +
-                        "|                   |" +
-                        "|                   |" +
-                        "|                   |" +
-                        "| S: %s    |    T: %s |" +
-                        "---------------------\n",
-                getIndex(), getName(), getStrength(), getToughness());
+        return String.format("| ID:%s  %s  S:%s  T:%s |", getIndex(), getName(), getStrength(), getToughness());
     }
 }

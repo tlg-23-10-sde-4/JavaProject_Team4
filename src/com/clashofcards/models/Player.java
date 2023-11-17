@@ -1,35 +1,49 @@
 package com.clashofcards.models;
 
+import com.apps.util.Prompter;
+import com.clashofcards.utils.Game;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class Player {
+    private static final String dataFilePath = "Data/Cards.csv";
     private String name;
-    private int health;
-    private List<Card> deck;
-    private List<Card> hand;
+    private int health = 20;
+    private List<Card> deck = initializeDeck();
+    private List<Card> hand = initializeDeck();
     private List<Card> graveyard;
 
 
     public Player() {}
 
-    public Player(String name) {
-        this.name = name;
-        this.health = 20;
-        this.deck = new ArrayList<>();
-        this.hand = new ArrayList<>();
-        this.graveyard = new ArrayList<>();
-        initializeDeck();
-        drawInitialCards(7);
-    }
+    // Business Methods
+    private List<Card> initializeDeck() {
+        List<Card> newDeck = new ArrayList<>();
 
+        try {
+            List<String> lines = Files.readAllLines(Path.of(dataFilePath));
 
+            Collections.shuffle(lines);
 
-    private void initializeDeck() {
-        // Add cards to the deck, assuming you have a method to create cards
-        // Card card1 = new Card("Card1", 3, 2);
-        // deck.add(card1);
-        // Add more cards to reach a deck size of 10
+            for (int i = 0; i < 10; i++) {
+                String[] tokens = lines.get(i).split(",");
+                int id = Integer.parseInt(tokens[0].trim());
+                String name = tokens[1].trim();
+                int attack = Integer.parseInt(tokens[2].trim());
+                int defense = Integer.parseInt(tokens[3].trim());
+
+                newDeck.add(new Card(id, name, attack, defense));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return newDeck;
     }
 
     private void drawInitialCards(int numCards) {
@@ -48,14 +62,65 @@ public class Player {
         }
     }
 
-    public void playCard(Card card) {
-        if (hand.contains(card)) {
-            hand.remove(card);
-            graveyard.add(card);
-            // Perform actions related to playing the card
-            // For example, apply effects, modify game state, etc.
-        } else {
-            // Handle case when the card isn't in the player's hand
+    public void playCard(Prompter prompter, List<Card> playerBattlefield) {
+            boolean valid = false;
+            while (!valid) {
+                System.out.println();
+
+                String cardToPlay = prompter.prompt("Pick a card to play from your hand or pass (Enter the ID): ");
+
+                // Use an iterator to avoid ConcurrentModificationException
+                Iterator<Card> iterator = getHand().iterator();
+                while (iterator.hasNext()) {
+                    Card card = iterator.next();
+                    if (card.getIndex().equals(Integer.valueOf(cardToPlay))) {
+                        iterator.remove(); // Remove the card from playerCards
+                        playerBattlefield.add(card);
+                        System.out.println("You played: " + card.getName());
+                        Game.delayGame(2);
+                        valid = true;
+                    }
+                }
+
+                if (!valid) {
+                    System.out.println("Invalid card ID");
+                }
+            }
+    }
+
+    public void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Ai enemy, Prompter prompter) {
+        System.out.println("Select a card to attack with:");
+        boolean valid = false;
+        while (!valid) {
+            String cardIndexStr = prompter.prompt("Enter the ID of the card you want to attack with from your battlefield!(13): ");
+            try {
+                int cardIndex = Integer.parseInt(cardIndexStr);
+                for(Card selectedCard : playerBattlefield) {
+                    if (selectedCard.getIndex().equals(cardIndex)) {
+                        System.out.println(p.getName() + " chose to attack with: " + selectedCard.getName());
+                        Game.delayGame(1);
+
+                        if(!enemyBattleField.isEmpty()) {
+                            Card enemyBlockingCard = enemy.enemyBlock(enemyBattleField, selectedCard);
+                            if(enemyBlockingCard != null) {
+                                Game.calculateBattleResults(enemyBlockingCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField);
+                            }
+                        }
+
+                        System.out.println(enemy.getName() + " has no cards to block with");
+                        Game.delayGame(2);
+                        System.out.println(enemy.getName() + " took " + selectedCard.getToughness() + " damage!");
+                        enemy.setHealth(enemy.getHealth() - selectedCard.getToughness());
+                        Game.delayGame(2);
+
+                        valid = true;
+                    } else {
+                        System.out.println("Invalid card ID. Please enter a valid ID.");
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
         }
     }
 
