@@ -16,8 +16,10 @@ public class CalculateBattleResultsTest {
     @Before
     public void init() {
         game = new CardGame();
-        game.getPlayerBattleField().add(new Card(1, "zombie", 0, 0));
-        game.getEnemyBattleField().add(new Card(1, "zombie", 5, 5));
+        game.getPlayer().setName("Player");
+        game.getEnemy().setName("Enemy");
+        game.getPlayerBattleField().add(new Card("1", "zombie", 0, 0));
+        game.getEnemyBattleField().add(new Card("1", "zombie", 5, 5));
     }
 
 
@@ -29,8 +31,8 @@ public class CalculateBattleResultsTest {
 
     @Test
     public void playerHealthShouldReflect_specifiedDamageValue() {
-        Card eCard = new Card(1, "zombie", 5, 5);
-        Card pCard = new Card(1, "zombie", 0, 0);
+        Card eCard = new Card("1", "zombie", 5, 5);
+        Card pCard = new Card("1", "zombie", 0, 0);
 
         Game.calculateBattleResults(eCard,pCard,game.getPlayer(),game.getEnemy(),game.getPlayerBattleField(),game.getEnemyBattleField(), true);
 

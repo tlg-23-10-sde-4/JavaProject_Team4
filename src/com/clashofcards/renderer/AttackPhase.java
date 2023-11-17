@@ -25,10 +25,9 @@ public class AttackPhase {
             displayer.updateBattleField(enemyBattleField, playerBattleField, player);
             if(wantsToAttack) {
                 player.attackWithCard(playerBattleField,player,enemyBattleField, enemy, prompter);
+                displayer.updateBattleField(enemyBattleField, playerBattleField, player);
             }
         }
-
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
 
         if (!player.getDeck().isEmpty()) {
             player.playCard(prompter, playerBattleField); // player plays a card
@@ -44,14 +43,15 @@ public class AttackPhase {
         while (!valid) {
             String attack = prompter.prompt("Would you like to attack (y/n)?");
             if (attack.equals("y") || attack.equals("n")) {
-                valid = true;
                 if (attack.equals("y")) {
                     System.out.println(p.getName() + " chose to attack!");
                     Game.delayGame(2);
                     wantsToAttack = true;
+                    valid = true;
                 } else {
                     Game.delayGame(2);
                     System.out.println(p.getName() + " chose not to attack");
+                    valid = true;
                 }
             } else {
                 System.out.println("Invalid input. Please enter 'y' or 'n'.");
