@@ -66,11 +66,9 @@ public class AttackPhase {
 
     private void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Ai enemy) {
         System.out.println("Select a card to attack with:");
-
         boolean valid = false;
         while (!valid) {
             String cardIndexStr = prompter.prompt("Enter the ID of the card you want to attack with from your battlefield!(13): ");
-
             try {
                 int cardIndex = Integer.parseInt(cardIndexStr);
                 for(Card selectedCard : playerBattlefield) {
