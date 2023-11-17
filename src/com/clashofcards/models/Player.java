@@ -73,7 +73,7 @@ public class Player {
                 Iterator<Card> iterator = getHand().iterator();
                 while (iterator.hasNext()) {
                     Card card = iterator.next();
-                    if (card.getIndex().equals(Integer.valueOf(cardToPlay))) {
+                    if (card.getIndex().equals(cardToPlay)) {
                         iterator.remove(); // Remove the card from playerCards
                         playerBattlefield.add(card);
                         System.out.println("You played: " + card.getName());
@@ -94,9 +94,8 @@ public class Player {
         while (!valid) {
             String cardIndexStr = prompter.prompt("Enter the ID of the card you want to attack with from your battlefield!(13): ");
             try {
-                int cardIndex = Integer.parseInt(cardIndexStr);
                 for(Card selectedCard : playerBattlefield) {
-                    if (selectedCard.getIndex().equals(cardIndex)) {
+                    if (selectedCard.getIndex().equals(cardIndexStr)) {
                         System.out.println(p.getName() + " chose to attack with: " + selectedCard.getName());
                         Game.delayGame(1);
 
