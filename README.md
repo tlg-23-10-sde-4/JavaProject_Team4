@@ -1,4 +1,4 @@
-# JavaProject_Team4
+# JavaProject_Team4 (Clash Of Cards)
 
 # What is this?
 - This is a card battle card game built using Java and ASCII Art.
@@ -25,6 +25,8 @@
   - The game works in an infinite loop until the game winning conditions have been met.
   - When the game fires up, each player will be given 7 random cards from our 40 card deck.
   - Playing cards in this game goes based on the cards ID. The ID of the card is located at the bottom left of the card, if you'd like to play that card, type that cards ID when prompted.
+  - IT IS HIGHLY RECOMMENDED YOU PLAY IN FULL SCREEN
+  - The game will not look very nice if you play it windowed and not full screen. Our game makes full use of the console with the cards and battling.
 - Attack Phase
   - Upon the start of the attack phase, if you have cards on your battlefield, you will be asked if you want to attack. Be careful, this might not be the smart move here. You must ensure that you are playing a card from your battlefield, not your hand. 
   - After you have chosen to attack or not, you will be prompted to play a card from your hand. Pick a card from your hand, not your battlefield.
@@ -41,6 +43,7 @@
   - Good Luck And We Hope You Enjoy Our Game!
 
 ## Credits
+The Brogrammersy
 - Vitalii Chibizov 
 - Udyr Barnes
 - Tyler Poepping

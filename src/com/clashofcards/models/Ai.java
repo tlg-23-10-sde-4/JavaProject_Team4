@@ -48,7 +48,6 @@ public class Ai extends Player {
             getHand().remove(chosenCard);
             enemyBattleField.add(chosenCard);
             Game.delayGame(2);
-            System.out.println("\n" + "\n");
             System.out.println(" " + getName() + " played " + chosenCard.getName());
             Game.delayGame(2);
         } else {
@@ -75,12 +74,11 @@ public class Ai extends Player {
 
             if (!playerBattlefield.isEmpty()) {
                 while (!valid) {
-                    String blockChoice = prompter.prompt(" Would you like to block (y/n)");
+                    String blockChoice = prompter.prompt(" Would you like to block (y/n)").trim().toLowerCase();
                     if (blockChoice.equals("y") || blockChoice.equals("n")) {
                         if (blockChoice.equals("y")) {
-                            String cardIndexStr = prompter.prompt(" Enter of the ID of the card you'd like to block with from your battlefield");
+                            String cardIndexStr = prompter.prompt(" Enter of the ID of the card you'd like to block with from your battlefield: ");
                             for (Card selectedCard : playerBattlefield) {
-                                System.out.println(selectedCard.getIndex()); // For testing
                                 if (selectedCard.getIndex().equals(Integer.valueOf(cardIndexStr))) {
                                     System.out.println(" " + p.getName() + " chose to block with: " + selectedCard.getName());
                                     Game.delayGame(2);

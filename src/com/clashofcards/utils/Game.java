@@ -21,8 +21,11 @@ public class Game {
         if (enemyIsAttacking) {
             if (playerCard.getToughness() > enemyCard.getStrength()) {
                 System.out.println(" " + p.getName() + "s " + playerCard.getName() + " has a defense of " + playerCard.getToughness());
+                delayGame(1);
                 System.out.println(" " + e.getName() + "s " + enemyCard.getName() + " has an attack of " + enemyCard.getStrength());
+                delayGame(1);
                 System.out.println(" " + p.getName() + " blocked all damage from " + e.getName() + " with " + playerCard.getName());
+                delayGame(2);
             } else if (playerCard.getToughness().equals(enemyCard.getStrength())) {
                 blockAndDestroy(enemyCard, playerCard, p, e, enemyBattleField, playerBattleField, true);
             } else if (playerCard.getToughness() < enemyCard.getStrength()) {
@@ -30,12 +33,17 @@ public class Game {
                 p.setHealth(p.getHealth() - (enemyCard.getStrength() - playerCard.getToughness()));
                 delayGame(2);
                 System.out.println(" " + e.getName() + " hit " + p.getName() + " for " + (enemyCard.getStrength() - playerCard.getToughness()) + " points");
+                Game.delayGame(2);
             }
         } else {
             if (enemyCard.getToughness() > playerCard.getStrength()) {
+                Game.delayGame(1);
                 System.out.println(" " + e.getName() + "s " + enemyCard.getName() + " has a defense of " + enemyCard.getToughness());
+                Game.delayGame(1);
                 System.out.println(" " + p.getName() + "s " + playerCard.getName() + " has an attack of " + playerCard.getStrength());
+                Game.delayGame(1);
                 System.out.println(" " + e.getName() + " blocked all damage from " + p.getName() + " with " + enemyCard.getName());
+                Game.delayGame(2);
             } else if (enemyCard.getToughness().equals(playerCard.getStrength())) {
                 blockAndDestroy(enemyCard, playerCard, p, e, enemyBattleField, playerBattleField, false);
             } else if (enemyCard.getToughness() < playerCard.getStrength()) {
@@ -43,6 +51,7 @@ public class Game {
                 e.setHealth(e.getHealth() - (playerCard.getStrength() - enemyCard.getToughness()));
                 delayGame(1);
                 System.out.println(" " + p.getName() + " hit " + e.getName() + " for " + (playerCard.getStrength() - enemyCard.getToughness()) + " points");
+                delayGame(2);
             }
         }
     }
@@ -50,28 +59,30 @@ public class Game {
     private static void blockAndDestroy(Card enemyCard, Card playerCard, Player p, Ai e, List<Card> enemyBattleField, List<Card> playerBattleField, boolean enemyIsAttacking) {
         if (enemyIsAttacking) {
             System.out.println(" " + e.getName() + "s " + enemyCard.getName() + " has an attack of " + enemyCard.getStrength());
-            delayGame(1);
+            delayGame(2);
 
             System.out.println(" " + p.getName() + "s " + playerCard.getName() + " has a defense of " + playerCard.getToughness());
-            delayGame(1);
+            delayGame(2);
 
             System.out.println(" " + p.getName() + " blocked " + e.getName() + " with " + playerCard.getName());
-            delayGame(1);
+            delayGame(2);
 
             System.out.println(" " + p.getName() + "s " + playerCard.getName() + " was destroyed by " + e.getName() + "s " + enemyCard.getName());
             playerBattleField.remove(enemyCard);
+            delayGame(2);
         } else {
             System.out.println(" " + p.getName() + "s " + playerCard.getName() + " has an attack of " + playerCard.getStrength());
-            delayGame(1);
+            delayGame(2);
 
             System.out.println(" " + e.getName() + "s " + enemyCard.getName() + " has a defense of " + enemyCard.getToughness());
-            delayGame(1);
+            delayGame(2);
 
             System.out.println(" " + e.getName() + " blocked " + p.getName() + " with " + enemyCard.getName());
-            delayGame(1);
+            delayGame(2);
 
             System.out.println(" " + e.getName() + "s " + enemyCard.getName() + " was destroyed by " + p.getName() + "s " + playerCard.getName());
             enemyBattleField.remove(enemyCard);
+            delayGame(2);
         }
     }
 }
