@@ -18,22 +18,27 @@ public class AttackPhase {
     Prompter prompter = new Prompter(new Scanner(System.in));
 
     public void playerAttackPhase(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
+        System.out.println(" " + player.getName() + "s attack phase Begins!");
+        Game.delayGame(2);
+
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
 
         if (!playerBattleField.isEmpty()) {
             boolean wantsToAttack = promptAttack(player);
-            displayer.updateBattleField(enemyBattleField, playerBattleField, player);
+            displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
             if(wantsToAttack) {
                 player.attackWithCard(playerBattleField,player,enemyBattleField, enemy, prompter);
-                displayer.updateBattleField(enemyBattleField, playerBattleField, player);
+                displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
             }
         }
 
         if (!player.getHand().isEmpty()) {
             player.playCard(prompter, playerBattleField); // player plays a card
+        } else {
+            System.out.println(player.getName() + " has no cards to play");
         }
 
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
     }
 
 
@@ -41,20 +46,21 @@ public class AttackPhase {
         boolean valid = false;
         boolean wantsToAttack = false;
         while (!valid) {
-            String attack = prompter.prompt("   Would you like to attack (y/n)?");
+            String attack = prompter.prompt(" Would you like to attack (y/n)?").trim().toLowerCase();
             if (attack.equals("y") || attack.equals("n")) {
                 if (attack.equals("y")) {
-                    System.out.println("   " + p.getName() + " chose to attack!");
+                    System.out.println(" " + p.getName() + " chose to attack!");
                     Game.delayGame(2);
                     wantsToAttack = true;
                     valid = true;
                 } else {
                     Game.delayGame(2);
-                    System.out.println("   " + p.getName() + " chose not to attack");
+                    System.out.println(" " + p.getName() + " chose not to attack");
+                    Game.delayGame(2);
                     valid = true;
                 }
             } else {
-                System.out.println("   Invalid input. Please enter 'y' or 'n'.");
+                System.out.println(" Invalid input. Please enter 'y' or 'n'.");
             }
         }
         return wantsToAttack;

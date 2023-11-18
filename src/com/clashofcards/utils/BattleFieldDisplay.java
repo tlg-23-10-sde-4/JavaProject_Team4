@@ -1,6 +1,7 @@
 package com.clashofcards.utils;
 
 import com.apps.util.Console;
+import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
 
@@ -17,31 +18,38 @@ public class BattleFieldDisplay {
             PrintBattlefieldText.printEnemyBattlefield();
             card.printCards(enemyBattleField);
         }
-        System.out.println("\n" + "\n" + "\n");
     }
 
     private void showPlayerBattlefield(List<Card> playerBattlefield) {
         if (playerBattlefield.isEmpty()) {
             System.out.println("---Your battlefield is empty---");
-            PrintBattlefieldText.printYourBattleField();
+            printPlayerBattleFieldText();
         } else {
             card.printCards(playerBattlefield);
-
-            System.out.println();
-            PrintBattlefieldText.printYourBattleField();
-            System.out.println("\n"+"\n"+"\n");
+            printPlayerBattleFieldText();
         }
+    }
+
+    private static void printPlayerBattleFieldText() {
+        PrintBattlefieldText.printYourBattleField();
+        System.out.println();
     }
 
     private void showPlayerHand(List<Card> playerHand) {
         card.printCards(playerHand);
         PrintBattlefieldText.printYourHand();
-        System.out.println("\n" + "\n");
+        System.out.println();
     }
 
-    public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player) {
+    private void displayGameStats(Player p, Ai e) {
+        System.out.println("                                                                                 " +
+                "Player Health: " + p.getHealth() + "   Enemy Health: " + e.getHealth() );
+    }
+
+    public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player, Ai enemy) {
         Console.clear();
         displayEnemyBattleField(enemyBattleField);
+        displayGameStats(player, enemy);
         showPlayerBattlefield(playerBattleField);
         showPlayerHand(player.getHand());
     }

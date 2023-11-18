@@ -11,6 +11,7 @@ import com.clashofcards.renderer.Welcome;
 import com.apps.util.Console;
 import com.clashofcards.utils.Game;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -48,38 +49,40 @@ public class CardGame {
             defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
         }
 
+        Console.clear();
+
         endGame(); // End the game
     }
 
 
     private void intializeGame() {
         Console.clear();
-        System.out.println(Welcome.welcomeBanner() + "\n" + "\n");
+        Welcome.welcomeBanner();
+        System.out.println();
         boolean validInput = false;
         while (!validInput) {
-            String input = prompter.prompt("    Enter your name (No more than 10 Characters)");
+            String input = prompter.prompt(" Enter your name (No more than 10 Characters)");
             if (input.length() <= 10) {
                 player.setName(input);
                 validInput = true;
+            } else {
+                System.out.println(" That name is to long, please enter a name less than 10 Characters");
             }
         }
 
         enemy.setName("Jimbo");
 
-        Console.clear();
-
         Game.delayGame(1);
-
         System.out.println();
-        System.out.println("   Everyone has drawn 10 cards");
+        System.out.println(" Everyone has drawn 10 cards");
+        Game.delayGame(1);
         System.out.println();
-
+        System.out.println(" The game is about to begin");
         Game.delayGame(2);
     }
 
     private void weclcome() {
-        System.out.println(Welcome.welcomeBanner());
-        System.out.println();
+        Welcome.welcomeBanner();
 
         List<String> instructions = null;
         try {
@@ -100,13 +103,13 @@ public class CardGame {
             }
 
             // Ask the user to press a key or input something to continue
-            prompter.prompt("   Press Enter to continue...");
+            prompter.prompt(" Press Enter to continue...");
         }
     }
 
     private boolean askForInstructions() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("   Would you like to see instructions? (Y/N): ");
+        System.out.print(" Would you like to see instructions? (Y/N): ");
         String input = scanner.next().toUpperCase();
         return input.equals("Y");
     }
@@ -116,7 +119,35 @@ public class CardGame {
     }
 
     private void endGame() {
-        Console.clear();
+        try {
+            List<String> gameOverText = Files.readAllLines(Path.of("images/GameOver.txt"));
+            List<String> loserText = Files.readAllLines(Path.of("images/Loser.txt"));
+            List<String> winnerText = Files.readAllLines(Path.of("images/Winner.txt"));
+
+            for (String line : gameOverText) {
+                System.out.println(line);
+            }
+            Game.delayGame(2);
+
+            Console.clear();
+
+            if(player.getHealth() <= 0) {
+                for (String line : loserText) {
+                    System.out.println(line);
+                }
+            } else {
+                for (String line : winnerText) {
+                    System.out.println(line);
+                }
+            }
+
+            Game.delayGame(6);
+
+            System.out.println(" Would you like to play again?");
+            // TODO: Implement Logic to restart the game
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // GETTERS AND SETTERS FOR TESTING ONLY

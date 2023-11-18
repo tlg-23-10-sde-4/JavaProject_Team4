@@ -48,12 +48,11 @@ public class Ai extends Player {
             getHand().remove(chosenCard);
             enemyBattleField.add(chosenCard);
             Game.delayGame(2);
-            System.out.println("\n"+ "\n");
-            System.out.println("   " + getName() + " played " + chosenCard.getName());
+            System.out.println(" " + getName() + " played " + chosenCard.getName());
             Game.delayGame(2);
         } else {
             Game.delayGame(2);
-            System.out.println("   " + getName() + "has no cards to play!");
+            System.out.println(" " + getName() + "has no cards to play!");
             Game.delayGame(2);
         }
     }
@@ -70,44 +69,43 @@ public class Ai extends Player {
 
         boolean valid = false;
         if (chosenCard != null) {
-            System.out.println("   Enemy is attacking with " + chosenCard.getName());
+            System.out.println(" Enemy is attacking with " + chosenCard.getName());
             Game.delayGame(2);
 
             if (!playerBattlefield.isEmpty()) {
                 while (!valid) {
-                    String blockChoice = prompter.prompt("   Would you like to block (y/n)");
+                    String blockChoice = prompter.prompt(" Would you like to block (y/n)").trim().toLowerCase();
                     if (blockChoice.equals("y") || blockChoice.equals("n")) {
                         if (blockChoice.equals("y")) {
-                            String cardIndexStr = prompter.prompt("   Enter of the ID of the card you'd like to block with from your battlefield");
+                            String cardIndexStr = prompter.prompt(" Enter of the ID of the card you'd like to block with from your battlefield: ");
                             for (Card selectedCard : playerBattlefield) {
-                                System.out.println(selectedCard.getIndex()); // For testing
                                 if (selectedCard.getIndex().equals(Integer.valueOf(cardIndexStr))) {
-                                    System.out.println("   " + p.getName() + " chose to block with: " + selectedCard.getName());
+                                    System.out.println(" " + p.getName() + " chose to block with: " + selectedCard.getName());
                                     Game.delayGame(2);
 
-                                    Game.calculateBattleResults(chosenCard, selectedCard,p,enemy,playerBattlefield,enemyBattleField, true);
+                                    Game.calculateBattleResults(chosenCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, true);
                                     Game.delayGame(2);
                                     valid = true;
                                 } else {
-                                    System.out.println("   Invalid input, please select the Id of a card from your battlefield I.E.(13)");
+                                    System.out.println(" Invalid input, please select the Id of a card from your battlefield I.E.(13)");
                                 }
                             }
                         } else {
-                            System.out.println("   " + p.getName() + " chose not to block");
+                            System.out.println(" " + p.getName() + " chose not to block");
                             Game.delayGame(2);
-                            System.out.println( "   " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
+                            System.out.println(" " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
                             p.setHealth(p.getHealth() - chosenCard.getStrength());
                             valid = true;
                         }
                     } else {
-                        System.out.println("   Invalid input: please enter 'y' or 'n'");
+                        System.out.println(" Invalid input: please enter 'y' or 'n'");
                     }
                 }
 
             } else {
-                System.out.println("   " + p.getName() + " has no cards to block with");
+                System.out.println(" " + p.getName() + " has no cards to block with");
                 Game.delayGame(2);
-                System.out.println("   " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
+                System.out.println(" " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
                 p.setHealth(p.getHealth() - chosenCard.getStrength());
             }
         }
