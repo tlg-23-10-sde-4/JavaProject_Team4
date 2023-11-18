@@ -15,13 +15,13 @@ public class DefensePhase {
     Prompter prompter = new Prompter(new Scanner(System.in));
     public void playerDefensePhase(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
 
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
 
         if (!enemyBattleField.isEmpty()) {
             enemy.attackWithCard(playerBattleField, player, enemyBattleField, enemy, prompter);
         }
 
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
 
         if (!enemy.getHand().isEmpty()) {
             Game.delayGame(2);
@@ -29,6 +29,6 @@ public class DefensePhase {
             Game.delayGame(2);
         }
 
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player);
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
     }
 }

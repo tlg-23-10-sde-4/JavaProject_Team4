@@ -1,6 +1,7 @@
 package com.clashofcards.utils;
 
 import com.apps.util.Console;
+import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
 
@@ -39,9 +40,14 @@ public class BattleFieldDisplay {
         System.out.println("\n" + "\n");
     }
 
-    public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player) {
+    private void displayGameStats(Player p, Ai e) {
+        System.out.println("                                          Player Health: " + p.getHealth() + "   Enemy Health: " + e.getHealth() );
+    }
+
+    public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player, Ai enemy) {
         Console.clear();
         displayEnemyBattleField(enemyBattleField);
+        displayGameStats(player, enemy);
         showPlayerBattlefield(playerBattleField);
         showPlayerHand(player.getHand());
     }

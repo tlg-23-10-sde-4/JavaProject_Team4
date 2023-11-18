@@ -2,15 +2,12 @@ package com.clashofcards.utils;
 
 import com.clashofcards.app.CardGame;
 import com.clashofcards.models.*;
-import com.clashofcards.models.Player;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import static junit.framework.TestCase.assertEquals;
 
-public class CalculateBattleResultsTest {
+public class GameTest {
     private CardGame game;
 
     @Before
