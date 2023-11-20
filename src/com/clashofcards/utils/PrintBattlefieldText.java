@@ -22,20 +22,22 @@ public class PrintBattlefieldText {
     }
 
     public static void printEnemyBattlefield() {
-        for(String line : enemyBattleFieldText) {
+        for (String line : enemyBattleFieldText) {
             System.out.println(line);
         }
     }
 
     public static void printYourBattleField() {
-        for(String line : yourBattleFieldText) {
+        for (String line : yourBattleFieldText) {
             System.out.println(line);
         }
     }
 
     public static void printYourHand() {
-        for(String line : yourHandText) {
+        for (String line : yourHandText) {
             System.out.println(line);
         }
     }
+
+
 }

@@ -15,42 +15,49 @@ public class Player {
     private static final String dataFilePath = "Data/Cards.csv";
     private String name;
     private int health = 20;
-    private List<Card> hand = initializeDeck();
-    private List<Card> graveyard;
-
+    private final List<Card> hand = initializeCards(7);
+    private final List<Card> deck = initializeCards(33);
 
     public Player() {
     }
 
-    // Business Methods
-    private List<Card> initializeDeck() {
-        List<Card> newDeck = new ArrayList<>();
+
+    /*
+     * Business Methods
+     * These will include all necessary actions from the player and AI
+     */
+
+    // initialize the deck and hand at random
+    private List<Card> initializeCards(int numberOfCards) {
+        List<Card> cards = new ArrayList<>();
 
         try {
             List<String> lines = Files.readAllLines(Path.of(dataFilePath));
 
             Collections.shuffle(lines);
 
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < numberOfCards; i++) {
                 String[] tokens = lines.get(i).split(",");
                 Integer id = Integer.parseInt(tokens[0].trim());
                 String name = tokens[1].trim();
                 int attack = Integer.parseInt(tokens[2].trim());
                 int defense = Integer.parseInt(tokens[3].trim());
 
-                newDeck.add(new Card(id, name, attack, defense));
+                cards.add(new Card(id, name, attack, defense));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return newDeck;
+
+        return cards;
     }
 
+    // Play a card
     public void playCard(Prompter prompter, List<Card> playerBattlefield) {
         boolean valid = false;
         while (!valid) {
 
-            String cardToPlay = prompter.prompt(" Pick a card to play from your hand or pass (Enter the ID): ");
+            String cardToPlay = prompter.prompt(" Pick a card to play from your hand (Enter the ID): ");
 
             Iterator<Card> iterator = getHand().iterator();
             while (iterator.hasNext()) {
@@ -70,16 +77,19 @@ public class Player {
         }
     }
 
+    // Attack with card
     public void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Ai enemy, Prompter prompter) {
         boolean valid = false;
         while (!valid) {
-            String cardIndexStr = prompter.prompt(" Enter the ID of the card you want to attack with from your battlefield: ");
+            String cardIndexStr = prompter.prompt(" Enter the ID of the card you want to attack with from your battlefield: ").trim();
             try {
                 int cardIndex = Integer.parseInt(cardIndexStr);
+                boolean cardFound = false; // Flag to check if the selected card is found
+
                 for (Card selectedCard : playerBattlefield) {
                     if (selectedCard.getIndex().equals(cardIndex)) {
                         System.out.println(" " + p.getName() + " chose to attack with: " + selectedCard.getName());
-                        Game.delayGame(1);
+                        Game.delayGame(2);
 
                         if (!enemyBattleField.isEmpty()) {
                             Card enemyBlockingCard = enemy.enemyBlock(enemyBattleField, selectedCard);
@@ -98,15 +108,29 @@ public class Player {
                             valid = true;
                         }
 
-                    } else {
-                        System.out.println(" Invalid card ID. Please enter a valid ID.");
+                        cardFound = true;
+                        break; // Exit the loop once a matching card is found, otherwise the Invalid card will be triggered
                     }
+                }
+
+                if (!cardFound) {
+                    System.out.println(" Invalid card ID. Please enter a valid ID.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println(" Invalid input. Please enter a valid number.");
             }
         }
     }
+
+    // Draw a card
+    public void drawCard() {
+        System.out.println(" You draw a card...");
+        Game.delayGame(2);
+        Card drawnCard = Game.handleCardDraw(getHand(), getDeck());
+        System.out.println(" You drew a " + drawnCard.getName());
+        Game.delayGame(3);
+    }
+
 
     // Getter/Setters
     public String getName() {
@@ -116,7 +140,6 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public void setHealth(int health) {
         this.health = health;
@@ -130,15 +153,7 @@ public class Player {
         return hand;
     }
 
-    public void setHand(List<Card> hand) {
-        this.hand = hand;
-    }
-
-    public List<Card> getGraveyard() {
-        return graveyard;
-    }
-
-    public void setGraveyard(List<Card> graveyard) {
-        this.graveyard = graveyard;
+    public List<Card> getDeck() {
+        return deck;
     }
 }

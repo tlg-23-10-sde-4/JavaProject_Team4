@@ -45,8 +45,8 @@ public class CardGame {
 
         // Run the game loop until conditions are met
         while (isGameOngoing()) {
-            attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
             defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
+            attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
         }
 
         Console.clear();
@@ -61,7 +61,7 @@ public class CardGame {
         System.out.println();
         boolean validInput = false;
         while (!validInput) {
-            String input = prompter.prompt(" Enter your name (No more than 10 Characters)");
+            String input = prompter.prompt(" Enter your name when you're ready to begin(No more than 10 Characters): ");
             if (input.length() <= 10) {
                 player.setName(input);
                 validInput = true;
@@ -74,10 +74,16 @@ public class CardGame {
 
         Game.delayGame(1);
         System.out.println();
-        System.out.println(" Everyone has drawn 10 cards");
-        Game.delayGame(1);
+
+        System.out.println(" The decks have been shuffled...");
+        Game.delayGame(2);
         System.out.println();
-        System.out.println(" The game is about to begin");
+
+        System.out.println(" Everyone has drawn 7 cards...");
+        Game.delayGame(2);
+        System.out.println();
+
+        System.out.println(" The game is about to begin!");
         Game.delayGame(2);
     }
 
@@ -131,7 +137,7 @@ public class CardGame {
 
             Console.clear();
 
-            if(player.getHealth() <= 0) {
+            if (player.getHealth() <= 0) {
                 for (String line : loserText) {
                     System.out.println(line);
                 }

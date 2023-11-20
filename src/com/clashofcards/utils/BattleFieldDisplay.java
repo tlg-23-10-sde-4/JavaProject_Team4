@@ -9,6 +9,7 @@ import java.util.List;
 
 public class BattleFieldDisplay {
     Card card = new Card();
+
     private void displayEnemyBattleField(List<Card> enemyBattleField) {
         System.out.println();
         if (enemyBattleField.isEmpty()) {
@@ -42,8 +43,8 @@ public class BattleFieldDisplay {
     }
 
     private void displayGameStats(Player p, Ai e) {
-        System.out.println("                                                                                 " +
-                "Player Health: " + p.getHealth() + "   Enemy Health: " + e.getHealth() );
+        System.out.println("                                                                                          " +
+                p.getName() + "s Health: " + p.getHealth() + " Cards left in your deck " + p.getDeck().size() + "    " + e.getName() + "s  Health: " + e.getHealth() + " Cards left in enemies deck " + e.getDeck().size() + "\n" );
     }
 
     public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player, Ai enemy) {
