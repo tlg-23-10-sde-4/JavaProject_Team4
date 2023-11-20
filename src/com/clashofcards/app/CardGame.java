@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CardGame {
@@ -40,24 +41,33 @@ public class CardGame {
 
 
     public void startGame() {
-        weclcome(); // Welcome the player
-        intializeGame(); // Initialize the game
-
-        // Run the game loop until conditions are met
-        while (isGameOngoing()) {
-            defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
-            attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
-        }
-
         Console.clear();
+        Welcome.welcomeBanner();
 
-        endGame(); // End the game
+        while (true) {
+            String play = prompter.prompt("Would you like to play? (Y?N)").trim().toLowerCase();
+            if (play.equals("n")) {
+                break;
+            }
+
+            intializeGame(); // Initialize the game
+
+            // Run the game loop until conditions are met
+            while (isGameOngoing()) {
+                defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
+                attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
+            }
+
+            Console.clear();
+
+            endGame(); // End the game
+        }
     }
 
 
     private void intializeGame() {
+        welcome(); // Welcome the player
         Console.clear();
-        Welcome.welcomeBanner();
         System.out.println();
         boolean validInput = false;
         while (!validInput) {
@@ -87,9 +97,7 @@ public class CardGame {
         Game.delayGame(2);
     }
 
-    private void weclcome() {
-        Welcome.welcomeBanner();
-
+    private void welcome() {
         List<String> instructions = null;
         try {
             instructions = Files.readAllLines(Path.of("Data/instructions.txt"));
@@ -146,11 +154,8 @@ public class CardGame {
                     System.out.println(line);
                 }
             }
-
             Game.delayGame(6);
-
-            System.out.println(" Would you like to play again?");
-            // TODO: Implement Logic to restart the game
+            Console.clear();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

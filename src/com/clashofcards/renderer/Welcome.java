@@ -18,6 +18,7 @@ public class Welcome {
             System.out.println(line);
         }
         System.out.println();
-        System.out.println(" It is highly recommended you play in full screen, if you haven't done so, you should do that now!" + "\n");
+        System.out.println(" It is highly recommended you play in full screen (and zoom out slightly)," +
+                " if you haven't done so, you should do that now!" + "\n");
     }
 }
