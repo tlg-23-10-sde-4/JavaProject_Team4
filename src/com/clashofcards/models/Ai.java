@@ -13,6 +13,7 @@ public class Ai extends Player {
         super();
     }
 
+    // Custom AI blocking method, should return card from the AI's battlefield
     public Card enemyBlock(List<Card> enemyBattleField, Card playerAttackingCard) {
         Card chosenCard = null;
         List<Card> eligibleCards = enemyBattleField.stream()
@@ -35,6 +36,8 @@ public class Ai extends Player {
 
     @Override
     public void playCard(Prompter prompter, List<Card> enemyBattleField) {
+        System.out.println(" " + getName() + "'s turn to play a card");
+        Game.delayGame(2);
         List<Card> eligibleCards = new ArrayList<>(getHand());
         Card chosenCard = null;
 
@@ -57,7 +60,6 @@ public class Ai extends Player {
         }
     }
 
-
     @Override
     public void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Ai enemy, Prompter prompter) {
         Card chosenCard = null;
@@ -77,7 +79,9 @@ public class Ai extends Player {
                     String blockChoice = prompter.prompt(" Would you like to block (y/n)").trim().toLowerCase();
                     if (blockChoice.equals("y") || blockChoice.equals("n")) {
                         if (blockChoice.equals("y")) {
-                            String cardIndexStr = prompter.prompt(" Enter of the ID of the card you'd like to block with from your battlefield: ");
+                            String cardIndexStr = prompter.prompt(" Enter the ID of the card you'd like to block with from your battlefield: ").trim();
+                            boolean cardFound = false;
+
                             for (Card selectedCard : playerBattlefield) {
                                 if (selectedCard.getIndex().equals(Integer.valueOf(cardIndexStr))) {
                                     System.out.println(" " + p.getName() + " chose to block with: " + selectedCard.getName());
@@ -86,14 +90,19 @@ public class Ai extends Player {
                                     Game.calculateBattleResults(chosenCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, true);
                                     Game.delayGame(2);
                                     valid = true;
-                                } else {
-                                    System.out.println(" Invalid input, please select the Id of a card from your battlefield I.E.(13)");
+                                    cardFound = true;
+                                    break; // Exit the loop once a matching card is found
                                 }
+                            }
+
+                            if (!cardFound) {
+                                System.out.println(" Invalid input, please select the ID of a card from your battlefield (e.g., 13)");
                             }
                         } else {
                             System.out.println(" " + p.getName() + " chose not to block");
                             Game.delayGame(2);
                             System.out.println(" " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
+                            Game.delayGame(2);
                             p.setHealth(p.getHealth() - chosenCard.getStrength());
                             valid = true;
                         }
@@ -101,15 +110,21 @@ public class Ai extends Player {
                         System.out.println(" Invalid input: please enter 'y' or 'n'");
                     }
                 }
-
             } else {
                 System.out.println(" " + p.getName() + " has no cards to block with");
                 Game.delayGame(2);
                 System.out.println(" " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
                 p.setHealth(p.getHealth() - chosenCard.getStrength());
+                Game.delayGame(2);
             }
         }
+    }
 
 
+    @Override
+    public void drawCard() {
+        Game.handleCardDraw(getHand(),getDeck());
+        System.out.println(" " + getName() + " drew a card");
+        Game.delayGame(3);
     }
 }
