@@ -15,7 +15,7 @@ public class DefensePhase {
     BattleFieldDisplay displayer = new BattleFieldDisplay();
     Prompter prompter = new Prompter(new Scanner(System.in));
 
-    public void playerDefensePhase(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
+    public void playerDefensePhase(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
         displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy); // We will use this to clear and update the battlefield
 
         System.out.println(" " + enemy.getName() + "'s attack phase begins!");

@@ -17,7 +17,7 @@ public class Game {
         }
     }
 
-    public static void calculateBattleResults(Card enemyCard, Card playerCard, Player p, Ai e, List<Card> playerBattleField, List<Card> enemyBattleField, boolean enemyIsAttacking) {
+    public static void calculateBattleResults(Card enemyCard, Card playerCard, Player p, Player e, List<Card> playerBattleField, List<Card> enemyBattleField, boolean enemyIsAttacking) {
         if (enemyIsAttacking) {
             if (playerCard.getToughness() > enemyCard.getStrength()) { // Case: toughness greater than attack
                 System.out.println(" " + p.getName() + "'s " + playerCard.getName() + " has a defense of " + playerCard.getToughness());
@@ -55,7 +55,7 @@ public class Game {
         }
     }
 
-    private static void blockAndDestroy(Card enemyCard, Card playerCard, Player p, Ai e, List<Card> enemyBattleField, List<Card> playerBattleField, boolean enemyIsAttacking) {
+    private static void blockAndDestroy(Card enemyCard, Card playerCard, Player p, Player e, List<Card> enemyBattleField, List<Card> playerBattleField, boolean enemyIsAttacking) {
         if (enemyIsAttacking) {
             System.out.println(" " + e.getName() + "'s " + enemyCard.getName() + " has an attack of " + enemyCard.getStrength());
             delayGame(2);
@@ -91,7 +91,7 @@ public class Game {
         return hand.get(6);
     }
 
-    public static void playerDrawNotification(Player p, Ai e, boolean isUserTurn) {
+    public static void playerDrawNotification(Player p, Player e, boolean isUserTurn) {
         String user;
         if(isUserTurn) {
             user = p.getName();
@@ -105,7 +105,7 @@ public class Game {
         Game.delayGame(2);
     }
 
-    public static void playerNonCardPlayNotification(Player p, Ai e, boolean isUserTurn) {
+    public static void playerNonCardPlayNotification(Player p, Player e, boolean isUserTurn) {
         String user;
         if(isUserTurn) {
             user = p.getName();
@@ -117,5 +117,29 @@ public class Game {
         Game.delayGame(2);
         System.out.println(" "+ user + " has no cards to play or you have the max amount of cards on the battlefield(7)");
         Game.delayGame(2);
+    }
+
+    public static void initializeGameNotification() {
+        Game.delayGame(1);
+        System.out.println();
+
+        System.out.println(" The decks have been shuffled...");
+        Game.delayGame(2);
+        System.out.println();
+
+        System.out.println(" Everyone has drawn 7 cards...");
+        Game.delayGame(2);
+        System.out.println();
+
+        System.out.println(" The game is about to begin!");
+        Game.delayGame(2);
+    }
+
+    public static boolean handleDirectDamage(Player enemy, Card selectedCard) {
+        Game.delayGame(2);
+        System.out.println(" " + enemy.getName() + " took " + selectedCard.getStrength() + " damage!");
+        enemy.setHealth(enemy.getHealth() - selectedCard.getStrength());
+        Game.delayGame(2);
+        return true;
     }
 }

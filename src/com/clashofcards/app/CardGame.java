@@ -1,10 +1,7 @@
 package com.clashofcards.app;
 
 import com.apps.util.Prompter;
-import com.clashofcards.models.Ai;
-import com.clashofcards.models.Card;
-import com.clashofcards.models.Player;
-import com.clashofcards.models.SmarterAi;
+import com.clashofcards.models.*;
 import com.clashofcards.renderer.AttackPhase;
 import com.clashofcards.renderer.DefensePhase;
 import com.clashofcards.renderer.Welcome;
@@ -17,12 +14,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class CardGame {
-    private Player player = new Player();
-    private Ai enemy = new Ai();
+    private Player player = new User();
+    private Player enemy;
     private List<Card> playerBattleField = new ArrayList<>();
     private List<Card> enemyBattleField = new ArrayList<>();
     private final AttackPhase attackPhase = new AttackPhase();
@@ -45,10 +41,10 @@ public class CardGame {
         Console.clear();
         Welcome.welcomeBanner();
 
-        while (true) {
-            String play = prompter.prompt("Would you like to play? (Y?N)").trim().toLowerCase();
-            if (play.equals("n")) {
-                break;
+        while(true) {
+            String play = prompter.prompt(" would you like to play the game(y/n)?").trim().toLowerCase();
+            if(play.equals("n")) {
+               break;
             }
 
             intializeGame(); // Initialize the game
@@ -70,6 +66,7 @@ public class CardGame {
         welcome(); // Welcome the player
         Console.clear();
         System.out.println();
+
         boolean validInput = false;
         while (!validInput) {
             String input = prompter.prompt(" Enter your name when you're ready to begin(No more than 10 Characters): ");
@@ -83,14 +80,13 @@ public class CardGame {
         //  now we will ask for "difficulty"
         validInput =false;
         while (!validInput) {
-            String aiChoise = prompter.prompt("Would you like to play Jimbo or Doofenshmirtz (J/D)?: ").trim().toLowerCase();
+            String aiChoise = prompter.prompt(" Would you like to play Jimbo or Doofenshmirtz (j/d)?: ").trim().toLowerCase();
             if (aiChoise.equals("j")) {
-                //enemy = new Ai();
+                enemy = new Ai();
                 enemy.setName("Jimbo");
                 validInput = true;
             } else if (aiChoise.equals("d")) {
-                //  TODO: fix it to make it instance of another class
-                //enemy = new SmarterAi();
+                enemy = new SmarterAi();
                 enemy.setName("Doofenshmirtz");
                 validInput = true;
             }   else {
@@ -98,19 +94,7 @@ public class CardGame {
             }
         }
 
-        Game.delayGame(1);
-        System.out.println();
-
-        System.out.println(" The decks have been shuffled...");
-        Game.delayGame(2);
-        System.out.println();
-
-        System.out.println(" Everyone has drawn 7 cards...");
-        Game.delayGame(2);
-        System.out.println();
-
-        System.out.println(" The game is about to begin!");
-        Game.delayGame(2);
+        Game.initializeGameNotification();
     }
 
     private void welcome() {
@@ -138,9 +122,7 @@ public class CardGame {
     }
 
     private boolean askForInstructions() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(" Would you like to see instructions? (Y/N): ");
-        String input = scanner.next().toUpperCase();
+        String input = prompter.prompt(" Would you like to see instructions? (y/n): ").toUpperCase().trim();
         return input.equals("Y");
     }
 
@@ -170,6 +152,7 @@ public class CardGame {
                     System.out.println(line);
                 }
             }
+
             Game.delayGame(6);
             Console.clear();
         } catch (IOException e) {
@@ -184,14 +167,6 @@ public class CardGame {
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-    public Ai getEnemy() {
-        return enemy;
-    }
-
-    public void setEnemy(Ai enemy) {
-        this.enemy = enemy;
     }
 
     public List<Card> getPlayerBattleField() {
@@ -216,5 +191,9 @@ public class CardGame {
 
     public DefensePhase getDefensePhase() {
         return defensePhase;
+    }
+
+    public Player getEnemy() {
+        return enemy;
     }
 }

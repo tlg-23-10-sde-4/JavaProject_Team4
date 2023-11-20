@@ -18,7 +18,7 @@ public class AttackPhase {
     BattleFieldDisplay displayer = new BattleFieldDisplay();
     Prompter prompter = new Prompter(new Scanner(System.in));
 
-    public void playerAttackPhase(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
+    public void playerAttackPhase(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
         System.out.println(" " + player.getName() + "'s attack phase Begins!");
         Game.delayGame(2);
 
