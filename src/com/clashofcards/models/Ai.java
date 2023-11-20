@@ -14,6 +14,7 @@ public class Ai extends Player {
     }
 
     // Custom AI blocking method, should return card from the AI's battlefield
+    @Override
     public Card enemyBlock(List<Card> enemyBattleField, Card playerAttackingCard) {
         Card chosenCard = null;
         List<Card> eligibleCards = enemyBattleField.stream()
@@ -61,7 +62,7 @@ public class Ai extends Player {
     }
 
     @Override
-    public void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Ai enemy, Prompter prompter) {
+    public void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Player enemy, Prompter prompter) {
         Card chosenCard = null;
 
         // Ai picks random card
@@ -100,11 +101,7 @@ public class Ai extends Player {
                             }
                         } else {
                             System.out.println(" " + p.getName() + " chose not to block");
-                            Game.delayGame(2);
-                            System.out.println(" " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
-                            Game.delayGame(2);
-                            p.setHealth(p.getHealth() - chosenCard.getStrength());
-                            valid = true;
+                            valid = Game.handleDirectDamage(p, chosenCard);
                         }
                     } else {
                         System.out.println(" Invalid input: please enter 'y' or 'n'");
@@ -112,18 +109,15 @@ public class Ai extends Player {
                 }
             } else {
                 System.out.println(" " + p.getName() + " has no cards to block with");
-                Game.delayGame(2);
-                System.out.println(" " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
-                p.setHealth(p.getHealth() - chosenCard.getStrength());
-                Game.delayGame(2);
+                Game.handleDirectDamage(p, chosenCard);
             }
         }
     }
 
-
+    // Draw card
     @Override
     public void drawCard() {
-        Game.handleCardDraw(getHand(),getDeck());
+        Game.handleCardDraw(getHand(), getDeck());
         System.out.println(" " + getName() + " drew a card");
         Game.delayGame(3);
     }

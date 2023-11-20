@@ -42,12 +42,12 @@ public class BattleFieldDisplay {
         System.out.println();
     }
 
-    private void displayGameStats(Player p, Ai e) {
+    private void displayGameStats(Player p, Player e) {
         System.out.println("                                                                                          " +
-                p.getName() + "s Health: " + p.getHealth() + " Cards left in your deck " + p.getDeck().size() + "    " + e.getName() + "s  Health: " + e.getHealth() + " Cards left in enemies deck " + e.getDeck().size() + "\n" );
+                p.getName() + "s Health: " + p.getHealth() + " " +  e.getName() + "s  Health: " + e.getHealth());
     }
 
-    public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player, Ai enemy) {
+    public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player, Player enemy) {
         Console.clear();
         displayEnemyBattleField(enemyBattleField);
         displayGameStats(player, enemy);

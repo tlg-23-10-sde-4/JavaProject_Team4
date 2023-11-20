@@ -16,20 +16,21 @@ public class SmarterAi extends Player{
         super();
     }
 
-    //  Business methods:
 
+    //  Business methods:
     // Custom AI blocking method
-    public Card enemyBlock(List<Card> enemyBattleField, Card playerAttackingCard, Player enemy) {
+    @Override
+    public Card enemyBlock(List<Card> enemyBattleField, Card playerAttackingCard) {
         Card chosenCard = bestByToughness(enemyBattleField);
+
         if (chosenCard.getToughness() > playerAttackingCard.getStrength()){
             return chosenCard;
         }   else if (Objects.equals(chosenCard.getToughness(), playerAttackingCard.getStrength())){
-            //  TODO: check for health, return null if enough health;
-            if(enemy.getHealth() <= playerAttackingCard.getStrength()){
+            if(getHealth() <= playerAttackingCard.getStrength()){
                 return chosenCard;
             }
         }
-        return null;
+        return chosenCard;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class SmarterAi extends Player{
         System.out.println(" " + getName() + "'s turn to play a card");
         Game.delayGame(2);
         //  TODO: if low health, take best by toughness
-        Card chosenCard = bestByStrength(enemyBattleField);
+        Card chosenCard = bestByStrength(getHand());
 
         // Ensure its not null
         if (chosenCard != null) {
@@ -54,8 +55,8 @@ public class SmarterAi extends Player{
     }
 
     @Override
-    public void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Ai enemy, Prompter prompter) {
-        Card chosenCard = bestByStrength(getHand());
+    public void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Player enemy, Prompter prompter) {
+        Card chosenCard = bestByStrength(enemyBattleField);
 
         boolean valid = false;
         if (chosenCard != null) {
@@ -88,11 +89,7 @@ public class SmarterAi extends Player{
                             }
                         } else {
                             System.out.println(" " + p.getName() + " chose not to block");
-                            Game.delayGame(2);
-                            System.out.println(" " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
-                            Game.delayGame(2);
-                            p.setHealth(p.getHealth() - chosenCard.getStrength());
-                            valid = true;
+                            valid = Game.handleDirectDamage(p, chosenCard);
                         }
                     } else {
                         System.out.println(" Invalid input: please enter 'y' or 'n'");
@@ -100,14 +97,12 @@ public class SmarterAi extends Player{
                 }
             } else {
                 System.out.println(" " + p.getName() + " has no cards to block with");
-                Game.delayGame(2);
-                System.out.println(" " + p.getName() + " took " + chosenCard.getStrength() + " damage!");
-                p.setHealth(p.getHealth() - chosenCard.getStrength());
-                Game.delayGame(2);
+                Game.handleDirectDamage(p, chosenCard);
             }
         }
     }
 
+    // Choose best card by strength
     private Card bestByStrength(List<Card> list){
         Card bestCard = list.get(0);
         for (Card card : list){
@@ -117,6 +112,8 @@ public class SmarterAi extends Player{
         }
         return bestCard;
     }
+
+    // Choose best card by toughness
     private Card bestByToughness(List<Card> list){
         Card bestCard = list.get(0);
         for (Card card : list){
@@ -129,10 +126,8 @@ public class SmarterAi extends Player{
 
     // Draw a card
     public void drawCard() {
-        System.out.println(" You draw a card...");
-        Game.delayGame(2);
-        Card drawnCard = Game.handleCardDraw(getHand(), getDeck());
-        System.out.println(" You drew a " + drawnCard.getName());
+        Game.handleCardDraw(getHand(), getDeck());
+        System.out.println(" " + getName() + " drew a card");
         Game.delayGame(3);
     }
 }
