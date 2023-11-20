@@ -8,6 +8,7 @@ import com.clashofcards.renderer.Welcome;
 
 import com.apps.util.Console;
 import com.clashofcards.utils.Game;
+import com.clashofcards.utils.Art;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,6 +25,8 @@ public class CardGame {
     private final AttackPhase attackPhase = new AttackPhase();
     private final DefensePhase defensePhase = new DefensePhase();
     Prompter prompter = new Prompter(new Scanner(System.in));
+    String dName = "Doofenshmirtz";
+    String jName = "Jimbo";
 
     // CTOR's
     public CardGame() {
@@ -83,11 +86,13 @@ public class CardGame {
             String aiChoise = prompter.prompt(" Would you like to play Jimbo or Doofenshmirtz (j/d)?: ").trim().toLowerCase();
             if (aiChoise.equals("j")) {
                 enemy = new Ai();
-                enemy.setName("Jimbo");
+                enemy.setName(jName);
+                printArt(jName);
                 validInput = true;
             } else if (aiChoise.equals("d")) {
                 enemy = new SmarterAi();
-                enemy.setName("Doofenshmirtz");
+                enemy.setName(dName);
+                printArt(dName);
                 validInput = true;
             }   else {
                 System.out.println(" Invalid input, choose again!");
@@ -158,6 +163,24 @@ public class CardGame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    //  method to print avatars of AI
+    public void printArt(String artName){
+        List<String> list = new ArrayList<>();
+        try {
+            list = Files.readAllLines(Path.of("images/" + artName + ".txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Console.clear();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print(list.get(i));
+            System.out.println();
+        }
+        System.out.println();
+        prompter.prompt("   Press Enter if you ready...");
+        Console.clear();
     }
 
     // GETTERS AND SETTERS FOR TESTING ONLY
