@@ -114,6 +114,7 @@ public class Ai extends Player {
         }
     }
 
+    // Draw card
     @Override
     public void drawCard() {
         Game.handleCardDraw(getHand(), getDeck());
