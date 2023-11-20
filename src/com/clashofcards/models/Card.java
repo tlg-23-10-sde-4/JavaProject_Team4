@@ -36,17 +36,17 @@ public class Card {
         //  loop repeats i times, where "i" is rows in each image
         String heartSymbol = "\u2665";
         String fistSymbol = "✊";
-        int imageRowsNum = 10;
+        int imageRowsNum = 8;
         for (int i = 0; i < imageRowsNum; i++){
 
             //  loop repeats number of card times
             for(Card card : list){
-                System.out.print(card.getImageLines().get(i)+"\t\t");
+                System.out.print(card.getImageLines().get(i)+"\t");
             }
             System.out.println();
         }
         for (Card card : list){
-            System.out.printf("id:%s        %s %s %s %s\t\t", card.getIndex(),fistSymbol,card.getStrength(),heartSymbol,card.getToughness());
+            System.out.printf("id:%s\t\t%s %s %s %s  \t", card.getIndex(),fistSymbol,card.getStrength(),heartSymbol,card.getToughness());
         }
         System.out.println();
     }
