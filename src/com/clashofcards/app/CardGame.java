@@ -4,6 +4,7 @@ import com.apps.util.Prompter;
 import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
+import com.clashofcards.models.SmarterAi;
 import com.clashofcards.renderer.AttackPhase;
 import com.clashofcards.renderer.DefensePhase;
 import com.clashofcards.renderer.Welcome;
@@ -79,8 +80,23 @@ public class CardGame {
                 System.out.println(" That name is to long, please enter a name less than 10 Characters");
             }
         }
-
-        enemy.setName("Jimbo");
+        //  now we will ask for "difficulty"
+        validInput =false;
+        while (!validInput) {
+            String aiChoise = prompter.prompt("Would you like to play Jimbo or Doofenshmirtz (J/D)?: ").trim().toLowerCase();
+            if (aiChoise.equals("j")) {
+                //enemy = new Ai();
+                enemy.setName("Jimbo");
+                validInput = true;
+            } else if (aiChoise.equals("d")) {
+                //  TODO: fix it to make it instance of another class
+                //enemy = new SmarterAi();
+                enemy.setName("Doofenshmirtz");
+                validInput = true;
+            }   else {
+                System.out.println(" Invalid input, choose again!");
+            }
+        }
 
         Game.delayGame(1);
         System.out.println();
