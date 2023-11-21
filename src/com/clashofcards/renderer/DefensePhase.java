@@ -15,20 +15,17 @@ public class DefensePhase {
     Prompter prompter = new Prompter(new Scanner(System.in));
 
     public void playerDefensePhase(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy); // We will use this to clear and update the battlefield
 
-        System.out.println(" It is " + enemy.getName() + "'s turn! ");
-        Game.delayGame(2);
+        // Notify of the enemies turn, update the battlefield
+        notifyAndUpdate(player, enemy, playerBattleField, enemyBattleField);
 
         // Enemies actual attack phase
         if (!enemyBattleField.isEmpty()) {
             enemy.attackWithCard(playerBattleField, player, enemyBattleField, enemy, prompter);
+            displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
         } else {
-            System.out.println(" " + enemy.getName() + " battlefield is empty, no cards to attack with");
-            Game.delayGame(2);
+            Game.playerEmptyBattlefieldNotification(player, enemy, playerBattleField, enemyBattleField, displayer, false);
         }
-
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
 
         // Enemy plays a card
         if (!enemy.getHand().isEmpty() && enemyBattleField.size() < 7) {
@@ -36,17 +33,25 @@ public class DefensePhase {
             Game.delayGame(2);
             displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
         } else {
-            Game.playerNonCardPlayNotification(player, enemy, false);
+            Game.playerNonCardPlayNotification(player, enemy, false); // Notify when they cant play a card
         }
 
         // Enemy draw a card
         if (enemy.getHand().size() < 7 && !enemy.getDeck().isEmpty()) {
-            System.out.println(" " + enemy.getName() + " is drawing a card");
+            System.out.println(" " + enemy.getName() + " is drawing a card" + "\n");
             Game.delayGame(2);
             enemy.drawCard();
             displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
         } else {
             Game.playerDrawNotification(player, enemy, false); // Notify why they cannot draw
         }
+    }
+
+    // Notify of the enemies turn, update the battlefield
+    private void notifyAndUpdate(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy); // We will use this to clear and update the battlefield
+
+        System.out.println(" It is " + enemy.getName() + "'s turn! " + "\n");
+        Game.delayGame(2);
     }
 }

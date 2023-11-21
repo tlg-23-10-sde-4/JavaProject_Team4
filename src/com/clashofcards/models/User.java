@@ -7,6 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class User extends Player{
+
+    public User() {super();}
+
     @Override
     public void drawCard() {
         System.out.println(" You draw a card...");
@@ -17,13 +20,6 @@ public class User extends Player{
         Game.delayGame(3);
     }
 
-    /*
-     * The user should not be using this however we must have it for the abstract method
-     */
-    @Override
-    public Card enemyBlock(List<Card> enemyBattleField, Card playerAttackingCard) {
-        return null;
-    }
 
     @Override
     public void playCard(Prompter prompter, List<Card> playerBattlefield) {
@@ -38,6 +34,7 @@ public class User extends Player{
                 if (card.getIndex().equals(Integer.valueOf(cardToPlay))) {
                     iterator.remove(); // Remove the card from playerCards
                     playerBattlefield.add(card);
+                    System.out.println();
                     System.out.println(" You played: " + card.getName());
                     Game.delayGame(2);
                     valid = true;
@@ -54,7 +51,7 @@ public class User extends Player{
     public void attackWithCard(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Player enemy, Prompter prompter) {
         boolean valid = false;
         while (!valid) {
-            String cardIndexStr = prompter.prompt(" Enter the ID of the card you want to attack with from your battlefield: ").trim();
+            String cardIndexStr = prompter.prompt(" Enter the ID of the card you want to attack with from YOUR BATTLEFIELD: ").trim();
             try {
                 int cardIndex = Integer.parseInt(cardIndexStr);
                 boolean cardFound = false; // Flag to check if the selected card is found
