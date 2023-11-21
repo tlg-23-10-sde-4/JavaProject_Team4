@@ -69,6 +69,7 @@ public class CardGame {
     }
 
 
+    // This is a good commit
     private void intializeGame() {
         welcome(); // Welcome the player
         Console.clear();
