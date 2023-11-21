@@ -16,7 +16,7 @@
 ## Installation
 - I would recommend cloning this repo to your local machine in a directory that is easy for you to find.
 - Located at the base of the repository is the run.cmd file. This is how you run the game. The console clearing features will not work in IntelliJ or whichever IDE you are using.
-- That's it, the repo already include Junit and all other need JAR's. Documentation for the 
+- That's it, the repo already includes Junit and all other need JAR's needed to run this program.
 
 ## Usage
 - How to play
@@ -43,7 +43,7 @@
   - Good Luck And We Hope You Enjoy Our Game!
 
 ## Credits
-The Brogrammersy
+The Brogrammers
 - Vitalii Chibizov 
 - Udyr Barnes
 - Tyler Poepping
