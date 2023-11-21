@@ -125,10 +125,9 @@ public class Ai extends Player {
                     if (selectedCard.getIndex().equals(Integer.valueOf(cardIndexStr))) {
                         System.out.println();
                         System.out.println(" " + p.getName() + " chose to block with: " + selectedCard.getName());
-                        System.out.println();
                         Game.delayGame(2);
 
-                        List<Card> cardsToRemove= Game.calculateBattleResults(chosenCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, false);
+                        List<Card> cardsToRemove= Game.calculateBattleResults(chosenCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, true);
                         if(!cardsToRemove.isEmpty()) {
                             for (Card card : cardsToRemove) {
                                 enemyBattleField.remove(card);
@@ -136,6 +135,7 @@ public class Ai extends Player {
                                 playerBattlefield.remove(card);
                             }
                         }
+                        Game.delayGame(2);
                         valid = true;
                         cardFound = true;
                         break; // Exit the loop once a matching card is found

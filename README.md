@@ -20,7 +20,7 @@
 
 ## Usage
 - How to play
-  - Once you have cloned the game onto your local machine, open the file and click the run.cmd if you are on windows or the run.sh if you are on mac.
+  - Once you have cloned the game onto your local machine, open the file and click the run.cmd if you are on windows or if you are using mac you need to create a run.sh file.
   - Upon launching the game you will be prompted and asked if you would like to see the game instructions. If you type yes, you will be shown a very basic outline of how the game works.
   - The game works in an infinite loop until the game winning conditions have been met.
   - When the game fires up, each player will be given 7 random cards from our 40 card deck.

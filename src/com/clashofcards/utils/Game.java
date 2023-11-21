@@ -1,10 +1,8 @@
 package com.clashofcards.utils;
 
-import com.apps.util.Prompter;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -150,9 +148,6 @@ public class Game {
             delayGame(2);
             playerBattleField.remove(playerCard);
         } else {
-            System.out.println(" " + e.getName() + " blocked " + p.getName() + " with " + enemyCard.getName());
-            delayGame(2);
-
             notifyCardStats(playerCard, enemyCard, p, e);
 
             System.out.println(" " + e.getName() + "'s " + enemyCard.getName() + " was destroyed by " + p.getName() + "'s " + playerCard.getName());

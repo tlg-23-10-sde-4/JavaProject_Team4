@@ -33,34 +33,37 @@ public class CardGame {
     }
 
     public void startGame() {
-        Console.clear();
-        Welcome.welcomeBanner();
-
         while (true) {
-            String play = prompter.prompt(" Would you like to play the game (y/n)?: ").trim().toLowerCase();
-            if (play.equals("n")) {
-                break;
-            }
-
-            intializeGame(); // Initialize the game
-
-            // Run the game loop until conditions are met
-            while (!gameIsOngoing) {
-                boolean gameOver = checkGameEndingConditions();
-                if (gameOver) {
-                    break;
-                }
-                defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
-                boolean gameOver2 = checkGameEndingConditions();
-                if (gameOver2) {
-                    break;
-                }
-                attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
-            }
-
             Console.clear();
+            Welcome.welcomeBanner();
 
-            endGame(); // End the game
+            String play = prompter.prompt(" Would you like to play the game? (y/n): ").trim().toLowerCase();
+            if (!play.equals("n") && !play.equals("y")) {
+                System.out.println(" Invalid input, please enter 'y' or 'n'");
+            } else if (play.equals("n")) {
+                break;
+            } else {
+                askForInstructions();
+                initializeGame(); // Initialize the game
+
+                // Run the game loop until conditions are met
+                while (!gameIsOngoing) {
+                    boolean gameOver = checkGameEndingConditions();
+                    if (gameOver) {
+                        break;
+                    }
+                    defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
+                    boolean gameOver2 = checkGameEndingConditions();
+                    if (gameOver2) {
+                        break;
+                    }
+                    attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
+                }
+
+                Console.clear();
+
+                endGame(); // End the game
+            }
         }
     }
 
@@ -70,15 +73,14 @@ public class CardGame {
 
 
     // This is a good commit
-    private void intializeGame() {
-        welcome(); // Welcome the player
+    private void initializeGame() {
         Console.clear();
         System.out.println();
 
         boolean validInput = false;
         while (!validInput) {
-            String input = prompter.prompt(" Enter your name when you're ready to begin (No more than 10 characters): ");
-            if (input.length() <= 10) {
+            String input = prompter.prompt(" Enter your name when you're ready to begin (in between 1-10 characters): ");
+            if (input.length() <= 10 && input.length() > 0) {
                 player.setName(input);
                 validInput = true;
             } else {
@@ -112,7 +114,8 @@ public class CardGame {
         prompter.prompt(" Press enter and the game will begin...");
     }
 
-    private void welcome() {
+    private void askForInstructions() {
+        System.out.println();
         List<String> instructions = null;
         try {
             instructions = Files.readAllLines(Path.of("Data/instructions.txt"));
@@ -121,26 +124,22 @@ public class CardGame {
             e.printStackTrace();
         }
 
-
-        boolean userWantsInstructions = askForInstructions();
-
-        if (userWantsInstructions) {
-            if (instructions != null) {
-                for (String line : instructions) {
+        boolean validInput  = false;
+        while (!validInput) {
+            System.out.println();
+            String input = prompter.prompt(" Would you like to see instructions (y/n)?: ").toLowerCase().trim();
+            if(input.equals("y")) {
+                for(String line : instructions) {
                     System.out.println(line);
                 }
+                System.out.println();
+                prompter.prompt(" Press enter and to continue...");
+            } else if (input.equals("n")) {
+                validInput = true;
+            } else {
+                System.out.println(" invalid input, please enter 'y' or 'n'");
             }
-
-            System.out.println();
-            // Ask the user to press a key or input something to continue
-            prompter.prompt(" Press Enter to continue...");
         }
-    }
-
-    private boolean askForInstructions() {
-        System.out.println();
-        String input = prompter.prompt(" Would you like to see instructions (y/n)?: ").toUpperCase().trim();
-        return input.equals("Y");
     }
 
     private void endGame() {
