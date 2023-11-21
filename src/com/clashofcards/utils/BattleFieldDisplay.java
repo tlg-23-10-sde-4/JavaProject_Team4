@@ -42,8 +42,8 @@ public class BattleFieldDisplay {
     }
 
     private void displayGameStats(Player p, Player e) {
-        System.out.println("-------------------------------------------------------------------------------------" +
-                p.getName() + "'s Health: " + p.getHealth() + "---------------" +  e.getName() + "'s  Health: " + e.getHealth() + "-----------------------");
+        System.out.println("------------------------------------------------------------------------------------- " +
+                p.getName() + "'s Health: " + p.getHealth() + " --------------- " +  e.getName() + "'s  Health: " + e.getHealth() + " -----------------------");
     }
 
     public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player, Player enemy) {

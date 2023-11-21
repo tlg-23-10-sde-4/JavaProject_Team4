@@ -34,9 +34,8 @@ public class Card {
 
     public void printCards(List<Card> list){
         //  loop repeats i times, where "i" is rows in each image
-        String heartSymbol = "H";
-        String fistSymbol = "A";
-        int imageRowsNum = 8;
+        String heartSymbol = "T";
+        String fistSymbol = "S";
         for (int i = 0; i < list.get(0).getImageLines().size(); i++){
 
             //  loop repeats number of card times

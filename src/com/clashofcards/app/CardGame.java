@@ -39,7 +39,7 @@ public class CardGame {
         Welcome.welcomeBanner();
 
         while (true) {
-            String play = prompter.prompt(" Would you like to play the game (y/n)?").trim().toLowerCase();
+            String play = prompter.prompt(" Would you like to play the game (y/n)?: ").trim().toLowerCase();
             if (play.equals("n")) {
                 break;
             }
@@ -69,6 +69,7 @@ public class CardGame {
     }
 
 
+    // This is a good commit
     private void intializeGame() {
         welcome(); // Welcome the player
         Console.clear();
@@ -108,7 +109,7 @@ public class CardGame {
         Game.initializeGameNotification();
 
         System.out.println();
-        prompter.prompt(" Press enter to and the game will begin...");
+        prompter.prompt(" Press enter and the game will begin...");
     }
 
     private void welcome() {
@@ -138,7 +139,7 @@ public class CardGame {
 
     private boolean askForInstructions() {
         System.out.println();
-        String input = prompter.prompt(" Would you like to see instructions? (y/n): ").toUpperCase().trim();
+        String input = prompter.prompt(" Would you like to see instructions (y/n)?: ").toUpperCase().trim();
         return input.equals("Y");
     }
 
@@ -241,5 +242,13 @@ public class CardGame {
 
     public Player getEnemy() {
         return enemy;
+    }
+
+    public void setEnemy(Player enemy) {
+        this.enemy = enemy;
+    }
+
+    public Prompter getPrompter() {
+        return prompter;
     }
 }

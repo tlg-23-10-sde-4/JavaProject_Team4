@@ -14,30 +14,24 @@ public class AttackPhase {
    private final Prompter prompter = new Prompter(new Scanner(System.in));
 
     public void playerAttackPhase(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
-        System.out.println(" " + player.getName() + "'s turn!");
-        Game.delayGame(2);
-
-        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy); // We will use this to clear and update the battlefield
+        // Notify the player it's their turn, update the battlefield
+        notifyAndUpdate(player, enemy, playerBattleField, enemyBattleField);
 
         // Actual attack phase
         if (!playerBattleField.isEmpty()) {
-            boolean wantsToAttack = promptAttack(player);
-            displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
+            boolean wantsToAttack = promptAttack(player); // Prompt the player to attack
+            displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy); // Update and clear the screen
             if (wantsToAttack) {
-                player.attackWithCard(playerBattleField, player, enemyBattleField, enemy, prompter);
-                displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
+                player.attackWithCard(playerBattleField, player, enemyBattleField, enemy, prompter); // Actual attack method
+                displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy); // Update and clear the screen
             }
         } else {
-            System.out.println(" Start of your attack phase" + "\n");
-            Game.delayGame(2);
-            System.out.println(" You have no cards on your battlefield to attack with");
-            Game.delayGame(2);
-            displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
+            Game.playerEmptyBattlefieldNotification(player, enemy, playerBattleField, enemyBattleField, displayer, true);
         }
 
         // Play a card
         if (!player.getHand().isEmpty() && playerBattleField.size() < 7) {
-            System.out.println(" Your turn to play a card");
+            System.out.println(" Your turn to play a card" + "\n");
             Game.delayGame(2);
             player.playCard(prompter, playerBattleField); // player plays a card
             displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
@@ -56,15 +50,27 @@ public class AttackPhase {
         displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy);
     }
 
+    // Notify the player it's their turn, update the battlefield
+    private void notifyAndUpdate(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
+        System.out.println(" " + player.getName() + "'s turn!");
+        Game.delayGame(2);
+
+        displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy); // We will use this to clear and update the battlefield
+
+        System.out.println(" Start of your attack phase" + "\n");
+        Game.delayGame(2);
+    }
+
 
     // Ask the user if the wish to attack, they might not want to every turn
     private boolean promptAttack(Player p) {
         boolean valid = false;
         boolean wantsToAttack = false;
         while (!valid) {
-            String attack = prompter.prompt(" Would you like to attack (y/n)?").trim().toLowerCase();
+            String attack = prompter.prompt(" Would you like to attack (y/n)?: ").trim().toLowerCase();
             if (attack.equals("y") || attack.equals("n")) {
                 if (attack.equals("y")) {
+                    System.out.println();
                     System.out.println(" " + p.getName() + " chose to attack!");
                     Game.delayGame(2);
                     wantsToAttack = true;
