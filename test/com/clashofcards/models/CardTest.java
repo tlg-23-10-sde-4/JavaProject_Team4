@@ -1,4 +1,4 @@
-/*
+package com.clashofcards.models;/*
  * Class to test Card and it's methods
  */
 

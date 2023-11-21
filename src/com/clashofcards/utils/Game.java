@@ -5,6 +5,7 @@ import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -28,9 +29,9 @@ public class Game {
 
 
     // Calculates the results of two cards battling
-    public static void calculateBattleResults(Card enemyCard, Card playerCard, Player p, Player e, List<Card> playerBattleField, List<Card> enemyBattleField, boolean enemyIsAttacking) {
+    public static List<Card> calculateBattleResults(Card enemyCard, Card playerCard, Player p, Player e, List<Card> playerBattleField, List<Card> enemyBattleField, boolean enemyIsAttacking) {
         int damage = Math.max(0, playerCard.getStrength() - enemyCard.getToughness());
-
+        List<Card> cards = new ArrayList<>();
         switch (compareStrengthAndToughness(playerCard, enemyCard, enemyIsAttacking)) {
             case 1: // playerCard strength > enemyCard toughness
                 handleVictory(playerCard, enemyCard, p, e, enemyBattleField, playerBattleField, enemyIsAttacking);
@@ -43,8 +44,11 @@ public class Game {
                 break;
             case -2: // Both cards are destroyed
                 handleDraw(playerCard, enemyCard, p, e, enemyBattleField, playerBattleField, enemyIsAttacking);
+                cards.add(playerCard);
+                cards.add(enemyCard);
                 break;
         }
+        return cards;
     }
 
     // Compare strength and toughness and return the proper case
@@ -73,6 +77,29 @@ public class Game {
                 return 0;
             } else {
                 return 1;
+            }
+        }
+    }
+
+    // Handle the case where both card's attacks are greater or equal to the opposing cards defense
+    private static void handleDraw(Card playerCard, Card enemyCard, Player p, Player e, List<Card> enemyBattleField, List<Card> playerBattleField, boolean enemyIsAttacking) {
+        notifyCardStats(playerCard, enemyCard, p, e);
+        delayGame(2);
+        System.out.println(" Both cards are destroyed." + "\n");
+        delayGame(2);
+        if (enemyIsAttacking) {
+            if(enemyCard.getStrength() > playerCard.getToughness()) {
+                int damage = enemyCard.getStrength() - playerCard.getToughness();
+                p.setHealth(p.getHealth() - damage);
+                System.out.println(" " + p.getName() + " was hit for " + damage + " damage!");
+                Game.delayGame(2);
+            }
+        } else {
+            if(playerCard.getStrength() > enemyCard.getToughness()) {
+                int damage = playerCard.getStrength() - enemyCard.getToughness();
+                e.setHealth(e.getHealth() - damage);
+                System.out.println(" " + e.getName() + " was hit for " + damage + " damage!");
+                Game.delayGame(2);
             }
         }
     }
@@ -112,31 +139,6 @@ public class Game {
             System.out.println(" " + p.getName() + " hit " + e.getName() + " for " + damage + " points");
             delayGame(2);
         }
-    }
-
-    // Handle the case where both card's attacks are greater or equal to the opposing cards defense
-    private static void handleDraw(Card playerCard, Card enemyCard, Player p, Player e, List<Card> enemyBattleField, List<Card> playerBattleField, boolean enemyIsAttacking) {
-        notifyCardStats(playerCard, enemyCard, p, e);
-        delayGame(2);
-        System.out.println(" Both cards are destroyed." + "\n");
-        delayGame(2);
-        if (enemyIsAttacking) {
-            if(enemyCard.getStrength() > playerCard.getToughness()) {
-                int damage = enemyCard.getStrength() - playerCard.getToughness();
-                p.setHealth(p.getHealth() - damage);
-                System.out.println(" " + p.getName() + " was hit for " + damage + " damage!");
-                Game.delayGame(2);
-            }
-        } else {
-            if(playerCard.getStrength() > enemyCard.getToughness()) {
-                int damage = playerCard.getStrength() - enemyCard.getToughness();
-                e.setHealth(e.getHealth() - damage);
-                System.out.println(" " + e.getName() + " was hit for " + damage + " damage!");
-                Game.delayGame(2);
-            }
-        }
-        playerBattleField.remove(playerCard);
-        enemyBattleField.remove(enemyCard);
     }
 
     // Print a message where the card was blocked and destroyed
