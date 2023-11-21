@@ -127,8 +127,14 @@ public class Ai extends Player {
                         System.out.println(" " + p.getName() + " chose to block with: " + selectedCard.getName());
                         Game.delayGame(2);
 
-                        Game.calculateBattleResults(chosenCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, true);
-                        Game.delayGame(2);
+                        List<Card> cardsToRemove= Game.calculateBattleResults(chosenCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, false);
+                        if(!cardsToRemove.isEmpty()) {
+                            for (Card card : cardsToRemove) {
+                                enemyBattleField.remove(card);
+                                Game.delayGame(1);
+                                playerBattlefield.remove(card);
+                            }
+                        }
                         valid = true;
                         cardFound = true;
                         break; // Exit the loop once a matching card is found

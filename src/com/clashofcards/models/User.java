@@ -3,6 +3,7 @@ package com.clashofcards.models;
 import com.apps.util.Prompter;
 import com.clashofcards.utils.Game;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -56,9 +57,10 @@ public class User extends Player{
                 int cardIndex = Integer.parseInt(cardIndexStr);
                 boolean cardFound = false; // Flag to check if the selected card is found
 
+                List<Card> cardsToRemove = new ArrayList<>(); // Collect cards to be removed
+
                 for (Card selectedCard : playerBattlefield) {
                     if (selectedCard.getIndex().equals(cardIndex)) {
-
                         System.out.println();
                         System.out.println(" " + p.getName() + " chose to attack with: " + selectedCard.getName());
                         Game.delayGame(2);
@@ -68,7 +70,8 @@ public class User extends Player{
                             if (enemyBlockingCard != null) {
                                 System.out.println(" " + enemy.getName() + " chose to block with " + enemyBlockingCard.getName());
                                 Game.delayGame(2);
-                                Game.calculateBattleResults(enemyBlockingCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, false);
+                                List<Card> removedCards = Game.calculateBattleResults(enemyBlockingCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, false);
+                                cardsToRemove.addAll(removedCards); // Collect cards to be removed
                                 valid = true;
                             } else {
                                 System.out.println(" " + enemy.getName() + " chose not block or has no cards to block with");
@@ -79,11 +82,19 @@ public class User extends Player{
                             valid = Game.handleDirectDamage(enemy, selectedCard);
                         }
 
+                        cardFound = true;
                     }
                 }
 
                 if (!cardFound) {
                     System.out.println(" Invalid card ID. Please enter a valid ID.");
+                }
+
+                // Remove the cards after the iteration
+                for (Card card : cardsToRemove) {
+                    enemyBattleField.remove(card);
+                    Game.delayGame(1);
+                    playerBattlefield.remove(card);
                 }
             } catch (NumberFormatException e) {
                 System.out.println(" Invalid input. Please enter a valid number.");
