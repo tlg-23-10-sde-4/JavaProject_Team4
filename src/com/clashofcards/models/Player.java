@@ -77,45 +77,6 @@ public abstract class Player {
         return null;
     }
 
-    // Check and handle our notifications for the Ai's chosen card, this should only be used by those classes
-    public void handleAiCardToPlay(List<Card> enemyBattleField, Card chosenCard) {
-        if (chosenCard != null) {
-            getHand().remove(chosenCard);
-            enemyBattleField.add(chosenCard);
-            Game.delayGame(2);
-            System.out.println(" " + getName() + " played " + chosenCard.getName());
-            Game.delayGame(2);
-        } else {
-            Game.delayGame(2);
-            System.out.println(" " + getName() + "has no cards to play!");
-            Game.delayGame(2);
-        }
-    }
-
-    // Check and handle our Ai's attack phase, this should only be used by those classes
-    public void handleAiAttack(List<Card> playerBattlefield, Player p, List<Card> enemyBattleField, Player enemy, Prompter prompter, Card chosenCard) {
-        boolean valid = false;
-        if (chosenCard != null) {
-            System.out.println(" Enemy is attacking with " + chosenCard.getName() + "\n");
-            Game.delayGame(2);
-
-            if (!playerBattlefield.isEmpty()) {
-                while (!valid) {
-                    String blockChoice = prompter.prompt(" Would you like to block (y/n)?: ").trim().toLowerCase();
-                    System.out.println();
-                    valid = Game.handleBlockChoice(playerBattlefield, p, enemyBattleField, enemy, prompter, chosenCard, valid, blockChoice);
-                }
-            } else {
-                System.out.println(" " + p.getName() + " has no cards to block with");
-                Game.handleDirectDamage(p, chosenCard);
-            }
-        } else {
-            System.out.println(" Enemy has no cards to attack with or chose not to attack");
-            Game.delayGame(2);
-        }
-    }
-
-
     // Getter and Setters
     public String getName() {
         return name;

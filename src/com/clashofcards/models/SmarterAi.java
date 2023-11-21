@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class SmarterAi extends Player {
+public class SmarterAi extends Ai {
 
     //  ctor
     public SmarterAi() {

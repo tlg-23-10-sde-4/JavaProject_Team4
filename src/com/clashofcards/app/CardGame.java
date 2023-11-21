@@ -27,8 +27,6 @@ public class CardGame {
     private final DefensePhase defensePhase = new DefensePhase();
     private final Prompter prompter = new Prompter(new Scanner(System.in));
 
-    String dName = "Doofenshmirtz";
-    String jName = "Jimbo";
 
     // CTOR's
     public CardGame() {
@@ -48,13 +46,15 @@ public class CardGame {
 
             // Run the game loop until conditions are met
             while (!gameIsOngoing) {
-                defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
-
                 boolean gameOver = checkGameEndingConditions();
                 if (gameOver) {
                     break;
                 }
-
+                defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
+                boolean gameOver2 = checkGameEndingConditions();
+                if (gameOver2) {
+                    break;
+                }
                 attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
             }
 
@@ -93,13 +93,13 @@ public class CardGame {
             String aiChoice = prompter.prompt(" Would you like to play Jimbo or Doofenshmirtz (j/d)?: ").trim().toLowerCase();
             if (aiChoice.equals("j")) {
                 enemy = new Ai();
-                enemy.setName(jName);
-                printArt(jName);
+                enemy.setName("Jimbo");
+                printArt("Jimbo");
                 validInput = true;
             } else if (aiChoice.equals("d")) {
                 enemy = new SmarterAi();
-                enemy.setName(dName);
-                printArt(dName);
+                enemy.setName("Doofenshmirtz");
+                printArt("Doofenshmirtz");
                 validInput = true;
             } else {
                 System.out.println(" Invalid input, choose again!");
