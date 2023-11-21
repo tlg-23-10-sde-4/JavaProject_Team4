@@ -38,6 +38,4 @@ public class PrintBattlefieldText {
             System.out.println(line);
         }
     }
-
-
 }

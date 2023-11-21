@@ -18,13 +18,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CardGame {
+    private boolean gameIsOngoing = false;
     private Player player = new User();
     private Player enemy;
     private List<Card> playerBattleField = new ArrayList<>();
     private List<Card> enemyBattleField = new ArrayList<>();
     private final AttackPhase attackPhase = new AttackPhase();
     private final DefensePhase defensePhase = new DefensePhase();
-    Prompter prompter = new Prompter(new Scanner(System.in));
+    private final Prompter prompter = new Prompter(new Scanner(System.in));
+
     String dName = "Doofenshmirtz";
     String jName = "Jimbo";
 
@@ -32,29 +34,27 @@ public class CardGame {
     public CardGame() {
     }
 
-    public CardGame(Player player, Ai enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
-        this.player = player;
-        this.enemy = enemy;
-        this.playerBattleField = playerBattleField;
-        this.enemyBattleField = enemyBattleField;
-    }
-
-
     public void startGame() {
         Console.clear();
         Welcome.welcomeBanner();
 
-        while(true) {
-            String play = prompter.prompt(" would you like to play the game(y/n)?").trim().toLowerCase();
-            if(play.equals("n")) {
-               break;
+        while (true) {
+            String play = prompter.prompt(" Would you like to play the game (y/n)?").trim().toLowerCase();
+            if (play.equals("n")) {
+                break;
             }
 
             intializeGame(); // Initialize the game
 
             // Run the game loop until conditions are met
-            while (isGameOngoing()) {
+            while (!gameIsOngoing) {
                 defensePhase.playerDefensePhase(player, enemy, playerBattleField, enemyBattleField);
+
+                boolean gameOver = checkGameEndingConditions();
+                if (gameOver) {
+                    break;
+                }
+
                 attackPhase.playerAttackPhase(player, enemy, playerBattleField, enemyBattleField);
             }
 
@@ -62,6 +62,10 @@ public class CardGame {
 
             endGame(); // End the game
         }
+    }
+
+    private boolean checkGameEndingConditions() {
+        return player.getHealth() <= 0 || enemy.getHealth() <= 0;
     }
 
 
@@ -72,34 +76,39 @@ public class CardGame {
 
         boolean validInput = false;
         while (!validInput) {
-            String input = prompter.prompt(" Enter your name when you're ready to begin(No more than 10 Characters): ");
+            String input = prompter.prompt(" Enter your name when you're ready to begin (No more than 10 characters): ");
             if (input.length() <= 10) {
                 player.setName(input);
                 validInput = true;
             } else {
-                System.out.println(" That name is to long, please enter a name less than 10 Characters");
+                System.out.println(" That name is to long, please enter a name less than 10 characters");
             }
         }
+
         //  now we will ask for "difficulty"
-        validInput =false;
+        validInput = false;
         while (!validInput) {
-            String aiChoise = prompter.prompt(" Would you like to play Jimbo or Doofenshmirtz (j/d)?: ").trim().toLowerCase();
-            if (aiChoise.equals("j")) {
+            System.out.println();
+            String aiChoice = prompter.prompt(" Would you like to play Jimbo or Doofenshmirtz (j/d)?: ").trim().toLowerCase();
+            if (aiChoice.equals("j")) {
                 enemy = new Ai();
                 enemy.setName(jName);
                 printArt(jName);
                 validInput = true;
-            } else if (aiChoise.equals("d")) {
+            } else if (aiChoice.equals("d")) {
                 enemy = new SmarterAi();
                 enemy.setName(dName);
                 printArt(dName);
                 validInput = true;
-            }   else {
+            } else {
                 System.out.println(" Invalid input, choose again!");
             }
         }
 
         Game.initializeGameNotification();
+
+        System.out.println();
+        prompter.prompt(" Press enter to and the game will begin...");
     }
 
     private void welcome() {
@@ -121,18 +130,16 @@ public class CardGame {
                 }
             }
 
+            System.out.println();
             // Ask the user to press a key or input something to continue
             prompter.prompt(" Press Enter to continue...");
         }
     }
 
     private boolean askForInstructions() {
+        System.out.println();
         String input = prompter.prompt(" Would you like to see instructions? (y/n): ").toUpperCase().trim();
         return input.equals("Y");
-    }
-
-    private boolean isGameOngoing() {
-        return player.getHealth() > 0 && enemy.getHealth() > 0;
     }
 
     private void endGame() {
@@ -144,6 +151,7 @@ public class CardGame {
             for (String line : gameOverText) {
                 System.out.println(line);
             }
+
             Game.delayGame(2);
 
             Console.clear();
@@ -160,6 +168,11 @@ public class CardGame {
 
             Game.delayGame(6);
             Console.clear();
+
+            playerBattleField.clear();
+            enemyBattleField.clear();
+            player.resetPlayer();
+            enemy.resetPlayer();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -184,6 +197,16 @@ public class CardGame {
     }
 
     // GETTERS AND SETTERS FOR TESTING ONLY
+
+
+    public boolean isGameIsOngoing() {
+        return gameIsOngoing;
+    }
+
+    public void setGameIsOngoing(boolean gameIsOngoing) {
+        this.gameIsOngoing = gameIsOngoing;
+    }
+
     public Player getPlayer() {
         return player;
     }

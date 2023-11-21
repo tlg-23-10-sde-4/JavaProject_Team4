@@ -1,42 +1,54 @@
 package com.clashofcards.models;
 
 import com.apps.util.Prompter;
-import com.clashofcards.utils.Game;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class Player {
     private static final String dataFilePath = "Data/Cards.csv";
     private String name;
     private int health = 20;
-    private final List<Card> hand = initializeCards(7);
-    private final List<Card> deck = initializeCards(33);
+    private List<Card> hand;
+    private List<Card> deck;
 
     public Player() {
+        initializeDeckAndHand();
     }
-
 
     /*
      * Business Methods
      * These will include all necessary actions from the player and AI
      */
 
+    public void resetPlayer() {
+        setHealth(20);
+        initializeDeckAndHand();
+    }
+
+    private void initializeDeckAndHand() {
+        List<Card> cards = initializeCards();  // Assuming 40 cards in total
+        Collections.shuffle(cards);  // Shuffle the cards
+
+        // Assign the first 7 cards to hand
+        hand = new ArrayList<>(cards.subList(0, 7));
+
+        // Assign the next 33 cards to deck
+        deck = new ArrayList<>(cards.subList(7, 40));
+    }
+
     // initialize the deck and hand at random
-    private List<Card> initializeCards(int numberOfCards) {
+    private List<Card> initializeCards() {
         List<Card> cards = new ArrayList<>();
 
         try {
             List<String> lines = Files.readAllLines(Path.of(dataFilePath));
 
-            Collections.shuffle(lines);
-
-            for (int i = 0; i < numberOfCards; i++) {
+            for (int i = 0; i < 40; i++) {
                 String[] tokens = lines.get(i).split(",");
                 Integer id = Integer.parseInt(tokens[0].trim());
                 String name = tokens[1].trim();
@@ -88,5 +100,13 @@ public abstract class Player {
 
     public List<Card> getDeck() {
         return deck;
+    }
+
+    public void setHand(List<Card> hand) {
+        this.hand = hand;
+    }
+
+    public void setDeck(List<Card> deck) {
+        this.deck = deck;
     }
 }
