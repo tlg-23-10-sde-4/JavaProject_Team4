@@ -63,6 +63,7 @@ public class User extends Player{
                     if (selectedCard.getIndex().equals(cardIndex)) {
                         System.out.println();
                         System.out.println(" " + p.getName() + " chose to attack with: " + selectedCard.getName());
+                        System.out.println();
                         Game.delayGame(2);
 
                         if (!enemyBattleField.isEmpty()) {

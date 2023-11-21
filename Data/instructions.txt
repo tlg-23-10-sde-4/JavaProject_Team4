@@ -19,6 +19,7 @@
  - Your cards strength and toughness are located at the bottom right of your card. The number to the right of the letter is your cards STRENGTH and TOUGHNESS I.E(S:4 T:5).
  - If you are attacked by a card with S:6  T:6, and you blocked with the example above, your card would be destroyed, and you would be dealt 1 damage:
    for example the enemies card is (S:6 T:6) and mine is (S:4 T:5) then the enemies S:6 - my cards T:5 = 1 damage dealt to me.
+   Note: If the enemies blocking card strength is the same or greater than your cards defense, even if you are attacking, your card will be destroyed to. However, only the enemy will take the damage.
  - Your battlefield and the enemies battlefield are seperated by a divider, I.E. "---------------------"
 
  Each player turn happens in a sequence of:
