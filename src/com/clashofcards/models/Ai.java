@@ -125,6 +125,7 @@ public class Ai extends Player {
                     if (selectedCard.getIndex().equals(Integer.valueOf(cardIndexStr))) {
                         System.out.println();
                         System.out.println(" " + p.getName() + " chose to block with: " + selectedCard.getName());
+                        System.out.println();
                         Game.delayGame(2);
 
                         List<Card> cardsToRemove= Game.calculateBattleResults(chosenCard, selectedCard, p, enemy, playerBattlefield, enemyBattleField, false);
