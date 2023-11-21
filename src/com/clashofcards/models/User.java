@@ -10,7 +10,8 @@ public class User extends Player{
     @Override
     public void drawCard() {
         System.out.println(" You draw a card...");
-        Game.delayGame(2);
+        System.out.println();
+        Game.delayGame(3);
         Card drawnCard = Game.handleCardDraw(getHand(), getDeck());
         System.out.println(" You drew a " + drawnCard.getName());
         Game.delayGame(3);

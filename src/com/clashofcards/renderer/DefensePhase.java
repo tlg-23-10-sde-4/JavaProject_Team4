@@ -7,7 +7,6 @@ import com.clashofcards.models.Player;
 import com.clashofcards.utils.BattleFieldDisplay;
 import com.clashofcards.utils.Game;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,14 +17,14 @@ public class DefensePhase {
     public void playerDefensePhase(Player player, Player enemy, List<Card> playerBattleField, List<Card> enemyBattleField) {
         displayer.updateBattleField(enemyBattleField, playerBattleField, player, enemy); // We will use this to clear and update the battlefield
 
-        System.out.println(" " + enemy.getName() + "'s attack phase begins!");
+        System.out.println(" It is " + enemy.getName() + "'s turn! ");
         Game.delayGame(2);
 
         // Enemies actual attack phase
         if (!enemyBattleField.isEmpty()) {
             enemy.attackWithCard(playerBattleField, player, enemyBattleField, enemy, prompter);
         } else {
-            System.out.println(" " + enemy.getName() + " has no cards to attack with!");
+            System.out.println(" " + enemy.getName() + " battlefield is empty, no cards to attack with");
             Game.delayGame(2);
         }
 

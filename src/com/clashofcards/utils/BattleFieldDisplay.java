@@ -1,14 +1,13 @@
 package com.clashofcards.utils;
 
 import com.apps.util.Console;
-import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
 
 import java.util.List;
 
 public class BattleFieldDisplay {
-    Card card = new Card();
+    private final Card card = new Card();
 
     private void displayEnemyBattleField(List<Card> enemyBattleField) {
         System.out.println();
@@ -43,8 +42,8 @@ public class BattleFieldDisplay {
     }
 
     private void displayGameStats(Player p, Player e) {
-        System.out.println("                                                                                          " +
-                p.getName() + "s Health: " + p.getHealth() + " " +  e.getName() + "s  Health: " + e.getHealth());
+        System.out.println("-------------------------------------------------------------------------------------" +
+                p.getName() + "'s Health: " + p.getHealth() + "---------------" +  e.getName() + "'s  Health: " + e.getHealth() + "-----------------------");
     }
 
     public void updateBattleField(List<Card> enemyBattleField, List<Card> playerBattleField, Player player, Player enemy) {

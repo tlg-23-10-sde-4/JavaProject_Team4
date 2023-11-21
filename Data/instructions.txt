@@ -1,8 +1,38 @@
-Instructions:
-Each player starts with 20HP (Health).
-Player draws random hand size on hand will be 10 cards
-Player plays a card from hand to the battlefield
-Select monster form the battlefield is selected to attack and defending player selects a card to defend is one is present
-Each card has a Strength score this represents attack and a toughness score this represents defense
-When attacking is stronger than defence the weaker monsters are destroyed and the difference is converted into HP damage
-Game ends when one player's health is dropped to 0.
+ Instructions:
+
+ If you are familiar with MTG or similar games than this logic will make sense to you. Same same, but simpler (No abilities or spells).
+
+ Each player starts with 20HP (Health).
+
+ The goal of the game is to take your opponent (Jimbo or Doofenshmirtz) down to zero health.
+
+ Jimbo is the easier AI, Doofenschmirtz is the harder AI. (Yes it is actually harder)
+
+ The game starts with each player being handed a shuffled deck of 40 cards. Each player then draws 7 cards.
+
+ The game will happen in phase starting with your opponent.
+
+ How the cards work:
+ - To play or attack with a card when prompted, you must type in the ID of the card located at the bottom left of each card.
+ - Make sure you are picking the card from the correct location. Cards above the "YOUR BATTLEFIELD" text with arrows pointing up are the cards you can attack with.
+   Note: The game will prompt you where to choose from.
+ - Your cards strength and toughness are located at the bottom right of your card. The number to the right of the letter is your cards STRENGTH and TOUGHNESS I.E(S:4 T:5).
+ - If you are attacked by a card with S:6  T:6, and you blocked with the example above, your card would be destroyed, and you would be dealt 1 damage:
+   for example the enemies card is (S:6 T:6) and mine is (S:4 T:5) then the enemies S:6 - my cards T:5 = 1 damage dealt to me.
+ - Your battlefield and the enemies battlefield are seperated by a divider, I.E. "---------------------"
+
+ Each player turn happens in a sequence of:
+ - You will have the choice to attack IF you have cards on your battlefield. If you or your opponent choose to attack, you will be offered the choice to block.
+   Note: Obviously this will be skipped the first turn. No one starts with cards on the battlefield.
+ - If a choice was made to block, the game will calculate the difference of your cards in strength or toughness and deal the damage accordingly.
+ - Your battlefield is indicated by the big letters saying "YOUR BATTLEFIELD" with arrows above it, pointing to any cards you have played.
+   Note: this is simulating the "table" in front of you.
+ - After the Attack phase above is finished, you or your opponent will be able to play a card from your hand, to the battlefield.
+ - The cards in your hand are the cards above the big letters "YOUR HAND". You CANNOT attack with these cards, they are in your "hand".
+   Note: This is simulating you holding the cards in your hand, like any other card game.
+ - You cannot see the AI's hand and the AI cannot see your hand.
+ - After you have played a card, IF you have cards left in your deck you will draw a card from your randomly shuffled deck.
+ - Be aware, you cannot play more than 7 cards to the battlefield at one time. If you did not play a card because your battlefield was full, you will not draw a card.
+ - The game will now rinse and repeat, THERE CAN ONLY BE ONE!
+
+ GOOD LUCK AND WE HOPE YOU ENJOY!!!

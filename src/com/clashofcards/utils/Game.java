@@ -1,6 +1,5 @@
 package com.clashofcards.utils;
 
-import com.clashofcards.models.Ai;
 import com.clashofcards.models.Card;
 import com.clashofcards.models.Player;
 
@@ -124,15 +123,15 @@ public class Game {
         System.out.println();
 
         System.out.println(" The decks have been shuffled...");
-        Game.delayGame(2);
+        Game.delayGame(1);
         System.out.println();
 
         System.out.println(" Everyone has drawn 7 cards...");
-        Game.delayGame(2);
+        Game.delayGame(1);
         System.out.println();
 
         System.out.println(" The game is about to begin!");
-        Game.delayGame(2);
+        Game.delayGame(1);
     }
 
     public static boolean handleDirectDamage(Player enemy, Card selectedCard) {
